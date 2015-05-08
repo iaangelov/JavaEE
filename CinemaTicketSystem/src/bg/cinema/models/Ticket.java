@@ -30,8 +30,8 @@ public class Ticket implements Serializable {
 	@ManyToOne
 	private Movie movie;
 
-	@ManyToOne
-	private Hall hall;
+	//@ManyToOne
+	//private Hall hall;
 
 	@OneToOne
 	private Seat seat;
@@ -72,13 +72,13 @@ public class Ticket implements Serializable {
 		this.movie = movie;
 	}
 
-	public Hall getHall() {
-		return hall;
-	}
-
-	public void setHall(Hall hall) {
-		this.hall = hall;
-	}
+//	public Hall getHall() {
+//		return hall;
+//	}
+//
+//	public void setHall(Hall hall) {
+//		this.hall = hall;
+//	}
 
 	public Seat getSeat() {
 		return seat;
