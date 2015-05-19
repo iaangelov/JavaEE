@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8789553103516459097L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
