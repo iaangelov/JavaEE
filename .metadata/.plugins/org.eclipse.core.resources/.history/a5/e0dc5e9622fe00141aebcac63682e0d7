@@ -1,0 +1,14 @@
+package morghulis.valar.model;
+
+import java.io.Serializable;
+
+import javax.inject.Named;
+import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@XmlRootElement
+public class Screening implements Serializable {
+
+	
+}
