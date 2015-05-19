@@ -69,6 +69,14 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public List<Ticket> getTickets() {
+		return this.tickets;
+	}
+
+	public void setTickets(final List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+	
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
@@ -79,14 +87,6 @@ public class User implements Serializable {
 		if (email != null && !email.trim().isEmpty())
 			result += ", email: " + email;
 		return result;
-	}
-
-	public List<Ticket> getTickets() {
-		return this.tickets;
-	}
-
-	public void setTickets(final List<Ticket> tickets) {
-		this.tickets = tickets;
 	}
 
 	@Override
