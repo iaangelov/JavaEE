@@ -6,17 +6,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "findByName", query = "SELECT u FROM Movie u WHERE u.name =:movieName"),
+		@NamedQuery(name = "getAllMovies", query = "SELECT u FROM Movie u") })
 public class Movie implements Serializable {
 
 	private static final long serialVersionUID = -5134102480184071142L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 
 	private String name;
 	private int year;
@@ -33,7 +38,7 @@ public class Movie implements Serializable {
 		this.genre = genre;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -75,7 +80,7 @@ public class Movie implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -88,11 +93,9 @@ public class Movie implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Movie other = (Movie) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		return true;
 	}
+
 }
