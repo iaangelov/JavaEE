@@ -36,7 +36,7 @@ public class SeatStatus {
 	@OneToMany(mappedBy = "status", cascade = CascadeType.REMOVE)
 	private List<Ticket> seats;
 	
-	private SeatStatus(String text){
+	public SeatStatus(String text){
 		text = AVAILABLE;
 	}
 	

@@ -25,9 +25,9 @@ public class UserDAO {
 	public List<User> getAllUsers(){
 		String textQuery;
 		if(userContext.getCurrentUser().getUserType().toString() == UserType.ADMINISTRATOR){
-			textQuery = "SELECT * FROM User";
+			textQuery = "SELECT u FROM User u";
 		}else{
-			textQuery = "SELECT * FROM User WHERE role.name = 'User'";
+			textQuery = "SELECT u FROM User u WHERE u.userType.name = 'User'";
 		}
 		
 		return entityManager.createQuery(textQuery, User.class).getResultList();
