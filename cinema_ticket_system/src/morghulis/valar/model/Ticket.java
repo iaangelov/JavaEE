@@ -28,6 +28,7 @@ public class Ticket implements Serializable {
 	
 	private int seatNumber;
 	
+	@ManyToOne
 	private SeatStatus status;
 
 	public Long getId() {
