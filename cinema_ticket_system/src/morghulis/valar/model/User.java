@@ -29,11 +29,13 @@ public class User implements Serializable {
 
 	private String email;
 
+
 	@OneToMany(mappedBy = "user")
 	private List<Ticket> tickets;
 	
 	@ManyToOne
 	private UserType userType;
+
 
 	public User() {
 	}
