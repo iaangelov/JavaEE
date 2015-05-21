@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import morghulis.valar.utils.SeatStatus;
+
 @Entity
 @XmlRootElement
 public class Ticket implements Serializable {
