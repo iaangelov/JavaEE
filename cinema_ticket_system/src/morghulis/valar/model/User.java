@@ -26,7 +26,7 @@ public class User implements Serializable {
 
 	private String email;
 
-	private List<Ticket> tickets = new ArrayList<>();
+	private List<Ticket> tickets;
 
 	public User() {
 	}

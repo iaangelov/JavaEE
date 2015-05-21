@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -19,6 +20,9 @@ public class Ticket implements Serializable {
 	private Long id;
 	
 	private Screening screening;
+	
+	@ManyToOne
+	private User user;
 	
 	private int seatNumber;
 	
