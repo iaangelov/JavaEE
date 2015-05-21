@@ -36,6 +36,11 @@ public class UserType implements Serializable {
 	public UserType() {
 		this.name = CUSTOMER;
 	}
+	
+	public UserType(String name) {
+		this.name = name;
+	}
+
 
 	public Long getId() {
 		return id;
