@@ -1,20 +1,38 @@
 package morghulis.valar.dao;
 
 import java.security.MessageDigest;
+import java.util.List;
 
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import morghulis.valar.model.User;
+import morghulis.valar.services.UserContext;
+import morghulis.valar.utils.UserType;
 
 @Singleton
 public class UserDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
+	@Inject
+	private UserContext userContext;
+	
+	public List<User> getAllUsers(){
+		String textQuery;
+		if(userContext.getCurrentUser().getUserType().toString() == UserType.ADMINISTRATOR){
+			textQuery = "SELECT * FROM User";
+		}else{
+			textQuery = "SELECT * FROM User WHERE role.name = 'User'";
+		}
+		
+		return entityManager.createQuery(textQuery, User.class).getResultList();
+	}
+	
 	public void addUser(User user) {
 		user.setPassword(getHashedPassword(user.getPassword()));
 		entityManager.persist(user);
