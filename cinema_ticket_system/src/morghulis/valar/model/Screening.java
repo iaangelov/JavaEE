@@ -1,13 +1,21 @@
 package morghulis.valar.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "allScreenings", query = "SELECT s FROM Screening s"),
+	@NamedQuery(name = "allScreeningsByHallNumber", query = "SELECT s FROM Screening s WHERE s.hall.hallNUmber = :hallNumber")
+})
 public class Screening implements Serializable {
 
 	private static final long serialVersionUID = 2520912188484284800L;
@@ -16,8 +24,12 @@ public class Screening implements Serializable {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Temporal(TemporalType.DATE)
+	private Date screeningDate;
+	@ManyToOne
 	private Hall hall;
 	
+	@OneToOne
 	private Movie movie;
 	
 	public Screening() {
@@ -34,6 +46,13 @@ public class Screening implements Serializable {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Date getScreeningDate() {
+		return screeningDate;
+	}
+	public void setScreeningDate(Date screeningDate) {
+		this.screeningDate = screeningDate;
 	}
 	public Hall getHall() {
 		return hall;
