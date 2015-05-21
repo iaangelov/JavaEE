@@ -1,14 +1,17 @@
 package morghulis.valar.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import morghulis.valar.utils.UserType;
 
 @Entity
 @XmlRootElement
@@ -26,15 +29,22 @@ public class User implements Serializable {
 
 	private String email;
 
+
+	@OneToMany(mappedBy = "user")
 	private List<Ticket> tickets;
+	
+	@ManyToOne
+	private UserType userType;
+
 
 	public User() {
 	}
 
-	public User(String username, String password, String email) {
+	public User(String username, String password, String email, UserType userType) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.userType = userType;
 	}
 
 	public Long getId() {
@@ -77,6 +87,14 @@ public class User implements Serializable {
 		this.tickets = tickets;
 	}
 	
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserStatus(UserType userType) {
+		this.userType = userType;
+	}
+
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";

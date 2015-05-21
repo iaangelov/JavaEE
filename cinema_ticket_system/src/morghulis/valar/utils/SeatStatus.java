@@ -1,4 +1,4 @@
-package morghulis.valar.model;
+package morghulis.valar.utils;
 
 public enum SeatStatus {
 

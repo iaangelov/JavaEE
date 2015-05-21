@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import morghulis.valar.utils.SeatStatus;
+
 @Entity
 @XmlRootElement
 public class Ticket implements Serializable {
