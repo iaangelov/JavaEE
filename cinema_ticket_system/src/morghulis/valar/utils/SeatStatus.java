@@ -32,8 +32,11 @@ public class SeatStatus {
 	@OneToMany(mappedBy = "status", cascade = CascadeType.REMOVE)
 	private List<Ticket> seats;
 	
-	private SeatStatus(String text){
+	public SeatStatus(){
 		text = AVAILABLE;
+	}
+	public SeatStatus(String text){
+		this.text = text;
 	}
 	
 	public Long getId() {
