@@ -17,7 +17,9 @@ public class Screening implements Serializable {
 	private Long id;
 	
 	private Hall hall;
+	
 	private Movie movie;
+	
 	public Screening() {
 		super();
 		// TODO Auto-generated constructor stub
