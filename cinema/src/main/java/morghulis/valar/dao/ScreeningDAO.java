@@ -16,7 +16,7 @@ public class ScreeningDAO {
 	
 	public void add(Screening screening) {
 	
-		Screening foundScreening = em.find(Screening.class, screening.getId());
+		Screening foundScreening = em.find(Screening.class, screening.getHall().getHallNumber());
 		if(foundScreening == null) {
 			em.persist(screening);
 		}
