@@ -27,7 +27,7 @@ public class UserDAO {
 		if (userContext.getCurrentUser().getUserType().toString() == UserType.ADMINISTRATOR) {
 			textQuery = "SELECT u FROM User u";
 		} else {
-			textQuery = "SELECT u FROM User u WHERE u.userType.name = 'User'";
+			textQuery = "SELECT u FROM User u WHERE u.userType.name = 'Customer'";
 		}
 
 		return entityManager.createQuery(textQuery, User.class).getResultList();
