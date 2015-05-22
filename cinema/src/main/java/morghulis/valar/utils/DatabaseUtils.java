@@ -29,9 +29,9 @@ public class DatabaseUtils {
     };
    
     private static Hall[] Halls = {
-    	new Hall(), 
-    	new Hall(),
-    	new Hall()
+    	new Hall(123), 
+    	new Hall(124),
+    	new Hall(125)
     };
     
     private static Screening[] Screenings = {
