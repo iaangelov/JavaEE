@@ -18,24 +18,30 @@ public class UserDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Inject
 	private UserContext userContext;
-	
-	public List<User> getAllUsers(){
+
+	public List<User> getAllUsers() {
 		String textQuery;
-		if(userContext.getCurrentUser().getUserType().toString() == UserType.ADMINISTRATOR){
+		if (userContext.getCurrentUser().getUserType().toString() == UserType.ADMINISTRATOR) {
 			textQuery = "SELECT u FROM User u";
-		}else{
+		} else {
 			textQuery = "SELECT u FROM User u WHERE u.userType.name = 'User'";
 		}
-		
+
 		return entityManager.createQuery(textQuery, User.class).getResultList();
 	}
-	
+
 	public void addUser(User user) {
-		user.setPassword(getHashedPassword(user.getPassword()));
-		entityManager.persist(user);
+		if (findByUsername(user.getUsername()) == null) {
+			user.setPassword(getHashedPassword(user.getPassword()));
+			entityManager.persist(user);
+		}
+	}
+
+	public boolean usernameTaken(String username) {
+		return findByUsername(username) != null;
 	}
 
 	public boolean validateCredentials(String username, String password) {
