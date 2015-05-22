@@ -30,6 +30,9 @@ public class Hall implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Hall(int hallNumber) {
+		this.hallNumber = hallNumber;
+	}
 	public Long getId() {
 		return id;
 	}
