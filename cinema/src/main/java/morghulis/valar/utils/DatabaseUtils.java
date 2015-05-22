@@ -1,13 +1,19 @@
 package morghulis.valar.utils;
 
+import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import morghulis.valar.dao.HallDAO;
 import morghulis.valar.dao.MovieDAO;
+import morghulis.valar.dao.ScreeningDAO;
 import morghulis.valar.dao.UserDAO;
+import morghulis.valar.model.Hall;
 import morghulis.valar.model.Movie;
+import morghulis.valar.model.Screening;
 import morghulis.valar.model.User;
 
 @Stateless
@@ -22,6 +28,18 @@ public class DatabaseUtils {
     	new User("user2", "password2", "mail@mail", new UserType(UserType.ADMINISTRATOR))
     };
    
+    private static Hall[] Halls = {
+    	new Hall(), 
+    	new Hall(),
+    	new Hall()
+    };
+    
+    private static Screening[] Screenings = {
+    	new Screening(Halls[0], Movies[0], new Date()),
+    	new Screening(Halls[1], Movies[1], new Date()),
+    	new Screening(Halls[2], Movies[1], new Date())
+    };
+    
     @PersistenceContext
     private EntityManager em;
     
@@ -31,15 +49,33 @@ public class DatabaseUtils {
     @EJB
     private UserDAO userDAO;
     
+    @EJB
+    private HallDAO hallDAO;
+    
+    @EJB
+    private ScreeningDAO screeningDAO;
+    
     public void addTestDataToDB(){
     	deleteData();
     	addTestMovies();
     	addTestUsers();
+    	addTestHalls();
+    	addTestScreenings();
     }
     
-    private void deleteData() {
+    private void addTestScreenings() {
+		
+		for (Screening screening : Screenings) {
+			
+			screeningDAO.add(screening);
+		}
+	}
+
+	private void deleteData() {
         em.createQuery("DELETE FROM Movie").executeUpdate();
         em.createQuery("DELETE FROM User").executeUpdate();
+        em.createQuery("DELETE FROM Hall").executeUpdate();
+        em.createQuery("DELETE FROM Screening").executeUpdate();
    }
 
     private void addTestMovies() {
@@ -52,6 +88,14 @@ public class DatabaseUtils {
     	for(User user : USERS){
     		userDAO.addUser(user);
     	}
+    }
+    
+    private void addTestHalls() {
+    	
+    	for (Hall hall : Halls) {
+			
+    		hallDAO.add(hall);
+		}
     }
 
 }
