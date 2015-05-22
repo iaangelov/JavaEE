@@ -13,8 +13,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @NamedQueries({
 	@NamedQuery(name = "allScreenings", query = "SELECT s FROM Screening s"),
 	@NamedQuery(name = "allScreeningsByHallNumber", query = "SELECT s FROM Screening s WHERE s.hall.hallNumber = :hallNumber")
