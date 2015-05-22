@@ -18,7 +18,7 @@ public class Hall implements Serializable {
 	private static final long serialVersionUID = -7868119437228188399L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private int hallNumber;
