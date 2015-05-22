@@ -38,10 +38,11 @@ public class Screening implements Serializable {
 	public Screening() {
 		super();
 	}
-	public Screening(Hall hall, Movie movie) {
+	public Screening(Hall hall, Movie movie, Date screeningDate) {
 		super();
 		this.hall = hall;
 		this.movie = movie;
+		this.screeningDate = screeningDate;
 	}
 	public Long getId() {
 		return id;
