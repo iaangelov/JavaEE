@@ -18,14 +18,35 @@ public class Hall implements Serializable {
 	private static final long serialVersionUID = -7868119437228188399L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long hallNumber;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	private int hallNumber;
 	
 	//@OneToMany(mappedBy = "hall", cascade = CascadeType.ALL)
 	private List<Ticket> seats;
+
+	public Hall() {
+		// TODO Auto-generated constructor stub
+	}
 	
-	public Hall(){
-		
+	public Hall(int hallNumber) {
+		this.hallNumber = hallNumber;
+	}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getHallNumber() {
+		return hallNumber;
+	}
+
+	public void setHallNumber(int hallNumber) {
+		this.hallNumber = hallNumber;
 	}
 
 	public List<Ticket> getSeats() {
@@ -36,17 +57,11 @@ public class Hall implements Serializable {
 		this.seats = seats;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((hallNumber == null) ? 0 : hallNumber.hashCode());
-		result = prime * result + ((seats == null) ? 0 : seats.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -59,28 +74,20 @@ public class Hall implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Hall other = (Hall) obj;
-		if (hallNumber == null) {
-			if (other.hallNumber != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!hallNumber.equals(other.hallNumber))
-			return false;
-		if (seats == null) {
-			if (other.seats != null)
-				return false;
-		} else if (!seats.equals(other.seats))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Hall [hallNumber=" + hallNumber + ", seats=" + seats + "]";
+		return "Hall [id=" + id + ", hallNumber=" + hallNumber + ", seats="
+				+ seats + "]";
 	}
 	
 	
-	
-	
-
-
 	
 }

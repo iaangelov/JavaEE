@@ -16,10 +16,7 @@ public class ScreeningDAO {
 	
 	public void add(Screening screening) {
 	
-		Screening foundScreening = em.find(Screening.class, screening.getId());
-		if(foundScreening == null) {
-			em.persist(screening);
-		}
+		em.persist(screening);
 	}
 	
 	public void remove(Long id) {
