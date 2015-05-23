@@ -41,7 +41,7 @@ public class ScreeningDAO {
 	
 	public Screening findScreeningById(Long id) {
 		
-		return em.createNamedQuery("SELECT s FROM Screening s WHERE s.id = :id", Screening.class).
+		return em.createQuery("SELECT s FROM Screening s WHERE s.id = :id", Screening.class).
 				setParameter("id", id).getSingleResult();
 	}
 }
