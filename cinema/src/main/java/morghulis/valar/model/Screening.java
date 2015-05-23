@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
 	@NamedQuery(name = "allScreenings", query = "SELECT s FROM Screening s"),
-	@NamedQuery(name = "allScreeningsByHallNumber", query = "SELECT s FROM Screening s WHERE s.hall.hallNumber = :hallNumber")
+	@NamedQuery(name = "allScreeningsByHallId", query = "SELECT s FROM Screening s WHERE s.hall.id = :id")
 })
 public class Screening implements Serializable {
 
