@@ -33,10 +33,10 @@ public class ScreeningDAO {
 		return em.createNamedQuery("allScreenings", Screening.class).getResultList();
 	}
 	
-	public List<Screening> getAllScreeningsByHallNumber(Long hallNumber) {
+	public List<Screening> getAllScreeningsByHallId(Long hallId) {
 		
-		return em.createNamedQuery("allScreeningsByHallNumber", Screening.class).
-				setParameter("hallNumber", hallNumber).getResultList();
+		return em.createNamedQuery("allScreeningsByHallId", Screening.class).
+				setParameter("id", hallId).getResultList();
 	}
 	
 	public Screening findScreeningById(Long id) {
