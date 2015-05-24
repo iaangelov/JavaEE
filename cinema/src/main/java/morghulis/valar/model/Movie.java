@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-		@NamedQuery(name = "findByName", query = "SELECT u FROM Movie u WHERE u.name =:movieName"),
+		@NamedQuery(name = "findByName", query = "SELECT u FROM Movie u WHERE u.name = :name"),
 		@NamedQuery(name = "getAllMovies", query = "SELECT u FROM Movie u") })
 public class Movie implements Serializable {
 
