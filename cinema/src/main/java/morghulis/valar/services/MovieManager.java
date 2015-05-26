@@ -31,11 +31,11 @@ public class MovieManager {
 		return movieDAO.getAllMovies();
 	}
 
-	@GET
+	/*@GET
 	@Produces("application/json")
 	public Movie getMovieById(@QueryParam("movieId") String movieId) {
 		return movieDAO.findById(Long.parseLong(movieId));
-	}
+	}*/
 
 	@GET
 	@Path("{movieName}")
@@ -45,6 +45,7 @@ public class MovieManager {
 	}
 
 	@DELETE
+	@Path("remove")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteMovie(@QueryParam("movieId") String movieId) {
 		Movie movieToRemove = movieDAO.findById(Long.parseLong(movieId));
@@ -55,6 +56,7 @@ public class MovieManager {
 	}
 
 	@PUT
+	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addMovie(Movie newMovie) {
 		if (newMovie != null) {
