@@ -18,47 +18,51 @@ import javax.ws.rs.core.Response;
 import slbedu.library.dao.MovieDAO;
 import slbedu.library.model.Movie;
 
+
 @Stateless
 @Path("movie")
 public class MovieManager {
 
-    @EJB
-    private MovieDAO movieDAO;
+	@EJB
+	private MovieDAO movieDAO;
 
-    @GET
-    @Produces("application/json")
-    public Collection<Movie> getAllMovies() {
-        return movieDAO.getAllMovies();
-    }
+	@GET
+	@Produces("application/json")
+	public Collection<Movie> getAllMovies() {
+		return movieDAO.getAllMovies();
+	}
 
-    @GET
-    @Produces("application/json")
-    public Movie getMovieById(@QueryParam("movieId") String movieId) {
-        return movieDAO.findById(Long.parseLong(movieId));
-    }
+	/*@GET
+	@Produces("application/json")
+	public Movie getMovieById(@QueryParam("movieId") String movieId) {
+		return movieDAO.findById(Long.parseLong(movieId));
+	}*/
 
-    @GET
-    @Path("{movieName}")
-    @Produces("application/json")
-    public Movie getMovieByName(@PathParam("movieName") String movieName) {
-        return movieDAO.findByName(movieName);
-    }
+	@GET
+	@Path("{movieName}")
+	@Produces("application/json")
+	public Movie getMovieByName(@PathParam("movieName") String movieName) {
+		return movieDAO.findByName(movieName);
+	}
 
-    @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteMovie(@QueryParam("movieId") String movieId) {
-        Movie movieToRemove = movieDAO.findById(Long.parseLong(movieId));
-        if (movieToRemove != null) {
-            movieDAO.deleteMovie(movieToRemove);
-        }
-        return Response.noContent().build();
-    }
+	@DELETE
+	@Path("remove")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteMovie(@QueryParam("movieId") String movieId) {
+		Movie movieToRemove = movieDAO.findById(Long.parseLong(movieId));
+		if (movieToRemove != null) {
+			movieDAO.deleteMovie(movieToRemove);
+		}
+		return Response.noContent().build();
+	}
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addMovie(Movie newMovie) {
-        if (newMovie != null) {
-            movieDAO.addMovie(newMovie);
-        }
-    }
+	@PUT
+	@Path("add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addMovie(Movie newMovie) {
+		if (newMovie != null) {
+			movieDAO.addMovie(newMovie);
+		}
+	}
+}
 }
