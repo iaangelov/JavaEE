@@ -24,10 +24,10 @@ public class UserDAO {
 
 	public List<User> getAllUsers() {
 		String textQuery;
-		if (userContext.getCurrentUser().getUserType().toString() == UserType.ADMINISTRATOR) {
+		if (userContext.getCurrentUser().getUserType().getText().equals(UserType.ADMINISTRATOR.getText())) {
 			textQuery = "SELECT u FROM User u";
 		} else {
-			textQuery = "SELECT u FROM User u WHERE u.userType.name = 'Customer'";
+			textQuery = "SELECT u FROM User u WHERE u.userType = 'Customer'";
 		}
 
 		return entityManager.createQuery(textQuery, User.class).getResultList();
@@ -45,16 +45,16 @@ public class UserDAO {
 	}
 
 	public boolean validateCredentials(String username, String password) {
-		String checkQuery = "SELECT u FROM User u WHERE username=:username AND password=:password";
+		String checkQuery = "SELECT u FROM User u WHERE u.username=:username AND u.password=:password";
 		TypedQuery<User> query = entityManager.createQuery(checkQuery,
 				User.class);
 		query.setParameter("username", username);
-		query.setParameter("password", password);
+		query.setParameter("password", getHashedPassword(password));
 		return makeQuery(query) != null;
 	}
 
 	public User findByUsername(String username) {
-		String checkQuery = "SELECT u FROM User u WHERE username=:username";
+		String checkQuery = "SELECT u FROM User u WHERE u.username=:username";
 		TypedQuery<User> query = entityManager.createQuery(checkQuery,
 				User.class);
 		query.setParameter("username", username);

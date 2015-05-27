@@ -9,7 +9,6 @@
 		<class>morghulis.valar.model.Ticket</class>
 		<class>morghulis.valar.model.User</class>
 		<class>morghulis.valar.utils.SeatStatus</class>
-		<class>morghulis.valar.utils.UserType</class>
 		 <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
         <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />

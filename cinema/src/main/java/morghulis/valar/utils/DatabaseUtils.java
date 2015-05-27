@@ -24,8 +24,8 @@ public class DatabaseUtils {
         new Movie("qwe", 2000, "aalsld")};
     
     private static User[] USERS = {
-    	new User("username", "password", "email@email", new UserType(UserType.CUSTOMER)),
-    	new User("user2", "password2", "mail@mail", new UserType(UserType.ADMINISTRATOR))
+    	new User("user", "user", "email@email", UserType.CUSTOMER),
+    	new User("admin", "admin", "mail@mail", UserType.ADMINISTRATOR)
     };
    
     private static Hall[] Halls = {

@@ -3,14 +3,10 @@ package morghulis.valar.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -35,10 +31,7 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Ticket> tickets;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="USER_ID")
-	private UserType userType;
-
+	private String userType;
 
 	public User() {
 	}
@@ -47,7 +40,7 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		this.userType = userType;
+		this.userType = userType.getText();
 	}
 
 	public Long getId() {
@@ -91,23 +84,22 @@ public class User implements Serializable {
 	}
 	
 	public UserType getUserType() {
-		return userType;
+		return UserType.getType(userType);
 	}
 
 	public void setUserStatus(UserType userType) {
-		this.userType = userType;
+		if(userType == null){
+			this.userType = null;
+		}else{
+			this.userType = userType.getText();
+		}
 	}
 
 	@Override
 	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (username != null && !username.trim().isEmpty())
-			result += "userName: " + username;
-		if (password != null && !password.trim().isEmpty())
-			result += ", password: " + password;
-		if (email != null && !email.trim().isEmpty())
-			result += ", email: " + email;
-		return result;
+		return "User [username=" + username + ", password=" + password
+				+ ", email=" + email + ", tickets=" + tickets + ", userType="
+				+ userType + "]";
 	}
 
 	@Override

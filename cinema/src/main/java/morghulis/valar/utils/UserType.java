@@ -1,69 +1,33 @@
 package morghulis.valar.utils;
 
-import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import morghulis.valar.model.User;
+public enum UserType {
 
-@Entity
-@Table(name = "ROLES")
-@XmlRootElement
-public class UserType implements Serializable {
 
-	private static final long serialVersionUID = -8450910398556257180L;
-
-	public static final String ADMINISTRATOR = "Administrator";
-	public static final String CUSTOMER = "Customer";
+	CUSTOMER("Customer"), ADMINISTRATOR("Administrator");
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String text;
 	
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="userType")
-	private List<User> users;
-	
-	private String name;
-	
-	public UserType() {
-		this.name = CUSTOMER;
+	private UserType(String text){
+		this.text = text;
 	}
 	
-	public UserType(String name) {
-		this.name = name;
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}	
+    public static UserType getType(String text) {
+        
+        if (text == null) {
+            return null;
+        }
+ 
+        for (UserType type: UserType.values()) {
+            if (text.equals(type.getText())) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("No matching type for type " + text);
+    }
+ 
+    public String getText() {
+        return text;
+    }
 }
