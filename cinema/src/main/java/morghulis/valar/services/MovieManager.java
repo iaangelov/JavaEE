@@ -31,11 +31,12 @@ public class MovieManager {
 		return movieDAO.getAllMovies();
 	}
 
-	/*@GET
+	@GET
+	@Path("byId/{movieId}")
 	@Produces("application/json")
-	public Movie getMovieById(@QueryParam("movieId") String movieId) {
+	public Movie getMovieById(@PathParam("movieId") String movieId) {
 		return movieDAO.findById(Long.parseLong(movieId));
-	}*/
+	}
 
 	@GET
 	@Path("{movieName}")
