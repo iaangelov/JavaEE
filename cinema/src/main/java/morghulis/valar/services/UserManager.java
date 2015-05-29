@@ -2,7 +2,6 @@ package morghulis.valar.services;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -35,17 +34,19 @@ public class UserManager {
 	private UserContext userContext;
 
 	@GET
-	@Path("all")
-	@Produces("application/json")
-	public Collection<User> getAllUsers() {
-		return this.userDAO.getAllUsers();
-	}
-
-	@GET
 	@Path("type")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getCurrentUserType() {
 		return userContext.getCurrentUser().getUserType().getText();
+	}
+	
+	@GET
+	@Path("authorised")
+	public Response isAuthorised(){
+		if(userContext.getCurrentUser() == null){
+			return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
+		}
+		return RESPONSE_OK;
 	}
 
 	@GET
@@ -89,7 +90,7 @@ public class UserManager {
 	public void logoutUser(@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		request.getSession().invalidate();
 		try {
-			response.sendRedirect(request.getContextPath() + "/login.html");
+			response.sendRedirect(request.getContextPath() + "/index.html");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
