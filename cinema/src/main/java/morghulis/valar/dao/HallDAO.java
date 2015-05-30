@@ -23,4 +23,9 @@ public class HallDAO {
 		
 		return em.createQuery("SELECT h FROM Hall h", Hall.class).getResultList();
 	}
+	
+	public Hall findHallById(Long id){
+	    return em.find(Hall.class, id);
+	}
+	
 }
