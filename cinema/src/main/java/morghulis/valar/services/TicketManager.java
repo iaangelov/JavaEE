@@ -103,10 +103,5 @@ public class TicketManager {
             }
             return Response.noContent().build();
         }
-        
-        
-        
-        
-       
        
 }
