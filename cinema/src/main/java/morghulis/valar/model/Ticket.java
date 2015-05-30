@@ -28,8 +28,8 @@ public class Ticket implements Serializable {
 	
 	private int seatNumber;
 	
-	@ManyToOne
-	private SeatStatus status;
+	
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -56,11 +56,16 @@ public class Ticket implements Serializable {
 	}
 
 	public SeatStatus getStatus() {
-		return status;
+		return SeatStatus.getType(status);
 	}
 
 	public void setStatus(SeatStatus status) {
-		this.status = status;
+		if(status == null) {
+			this.status = null;
+			
+		} else {
+			this.status = status.getText();
+		}
 	}
 
 	@Override
