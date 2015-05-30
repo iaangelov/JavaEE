@@ -1,52 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Java EE Exercise 2</title>
+<title>Cinema Ticket System</title>
 <link rel="stylesheet" type="text/css" href="styles/bootstrap.css" />
 <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript">
-
-    $.ajax({
-    	url : 'rest/user/authorised',
-    	type : "GET",
-    	statusCode: {
-	        401: function() {
-	        	$( "#header" ).append( '<a href="register.html" class="register_form"> Register </a><a href="login.html" class="login_form"> Login </a>' );
-	          },
-	        200: function() {
-	        	$( "#header" ).append( '<a href="rest/user/logout" class="login_form"> Logout </a>' );
-	        }
-        }
-    });
-    
-    $.ajax({
-        url : 'rest/movie',
-        type : "GET",
-        dataType : "json",
-        success : function(data, textStatus, jqXHR) {
-            drawTable(data);
-        }
-    });
-
-    function drawTable(data) {
-    	var movies = data.movie;
-        for (var i = 0; i < movies.length; i++) {
-            drawRow(movies[i]);
-        }
-    }
-
-    function drawRow(rowData) {
-        var row = $("<tr />")
-        $("#movies_table").append(row);
-        row.append($("<td>" + rowData.name + "</td>"));
-        row.append($("<td>" + rowData.year + "</td>"));
-        row.append($("<td>" + rowData.genre + "</td>"));
-    }
-
+	$(document).ready(indexInit())
 </script>
 
 </head>
 <body>
+	<div id="header" align="center">
+		<h1>Movie Application</h1>
+		<div class="login_register" align="center">
+			<a href="login.html" class="login_form"> Log in </a> <a
+				href="register.html" class="register_form"> Register </a>
+		</div>
+		<div class="logout">
+			<a onclick="logout()" href="#"> Logout </a>
+		</div>
+	</div>
+
+	<div class="welcome-greeting">
+		Welcome <span id="user-holder"></span>!
+	</div>
+
+	<div>
 		<table id="movies_table" class="table">
 			<tr>
 				<th>Name</th>
@@ -56,6 +36,5 @@
 		</table>
 	</div>
 
-	
 </body>
 </html>
