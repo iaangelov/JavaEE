@@ -38,7 +38,7 @@ public class Movie implements Serializable {
 		this.genre = genre;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

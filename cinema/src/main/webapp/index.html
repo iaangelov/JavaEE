@@ -3,86 +3,50 @@
 <head>
 <title>Java EE Exercise 2</title>
 <link rel="stylesheet" type="text/css" href="styles/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="styles/library.css" />
 <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript">
-	isUserAuthenticated = false;
 
-	$(document).ready(function() {
-		$.ajax({
-			url : 'rest/user/authenticated',
-			type : "GET",
-			dataType : "json",
-			statusCode : {
-				200 : function() {
-					$(".login_register").hide();
-					isUserAuthenticated = true;
-				}
-			}
-		});
-		drawTableWithMovies();
+    $.ajax({
+    	url : 'rest/user/authorised',
+    	type : "GET",
+    	statusCode: {
+	        401: function() {
+	        	$( "#header" ).append( '<a href="register.html" class="register_form"> Register </a><a href="login.html" class="login_form"> Login </a>' );
+	          },
+	        200: function() {
+	        	$( "#header" ).append( '<a href="rest/user/logout" class="login_form"> Logout </a>' );
+	        }
+        }
+    });
+    
+    $.ajax({
+        url : 'rest/movie',
+        type : "GET",
+        dataType : "json",
+        success : function(data, textStatus, jqXHR) {
+            drawTable(data);
+        }
+    });
 
-		$.ajax({
-			url : 'rest/user/current',
-			type : "GET",
-			dataType : "text"
-		}).always(function(data) {
-			if (typeof data != 'undefined') {
-				$("#user-holder").html(data);
-			} else {
-				$(".welcome-greeting").hide();
-			}
-		});
-	});
+    function drawTable(data) {
+    	var movies = data.movie;
+        for (var i = 0; i < movies.length; i++) {
+            drawRow(movies[i]);
+        }
+    }
 
-	function drawTableWithMovies() {
-		$.ajax({
-			url : 'rest/movie',
-			type : "GET",
-			dataType : "json",
-			success : function(data) {
-				drawTable(data);
-			}
-		});
-	}
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        $("#movies_table").append(row);
+        row.append($("<td>" + rowData.name + "</td>"));
+        row.append($("<td>" + rowData.year + "</td>"));
+        row.append($("<td>" + rowData.genre + "</td>"));
+    }
 
-	function drawTable(data) {
-		var movies = data.movie;
-		for (var i = 0; i < movies.length; i++) {
-			drawRow(movies[i]);
-		}
-	}
-
-	function drawRow(rowData) {
-		var row = $("<tr />")
-		$("#movies_table").append(row);
-		row.append($("<td>" + rowData.name + "</td>"));
-		row.append($("<td>" + rowData.year + "</td>"));
-		row.append($("<td>" + rowData.genre + "</td>"));
-	}
 </script>
 
 </head>
 <body>
-
-<div align="center">
-		<h1>Movie Application</h1>
-
-	</div>
-	
-	
-<div align = "center" class="login_register">
-		<a href="login.html" class="login_form"> Log in </a> <a
-			href="register.html" class="register_form"> Register </a>
-	</div>
-	
-	<div class="welcome-greeting">
-		Welcome <span id="user-holder"></span> !
-	</div>
-
-
-	
-	<div>
 		<table id="movies_table" class="table">
 			<tr>
 				<th>Name</th>
@@ -93,6 +57,5 @@
 	</div>
 
 	
-
 </body>
 </html>

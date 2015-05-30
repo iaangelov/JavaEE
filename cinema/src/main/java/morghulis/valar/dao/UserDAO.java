@@ -24,7 +24,7 @@ public class UserDAO {
 
 	public List<User> getAllUsers() {
 		String textQuery;
-		if (userContext.getCurrentUser().getUserType().getText().equals(UserType.ADMINISTRATOR.getText())) {
+		if (userContext.getCurrentUser().getUserType() == UserType.ADMINISTRATOR) {
 			textQuery = "SELECT u FROM User u";
 		} else {
 			textQuery = "SELECT u FROM User u WHERE u.userType = 'Customer'";
@@ -59,6 +59,14 @@ public class UserDAO {
 				User.class);
 		query.setParameter("username", username);
 		return makeQuery(query);
+	}
+	
+	public User findById(Long id){
+		return entityManager.find(User.class, id);
+	}
+	
+	public void removeUserById(Long id){
+		entityManager.remove(findById(id));
 	}
 
 	private User makeQuery(TypedQuery<User> query) {
