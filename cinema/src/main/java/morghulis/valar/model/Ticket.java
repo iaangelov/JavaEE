@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import morghulis.valar.utils.SeatStatus;
 
+
 @Entity
 @XmlRootElement
 public class Ticket implements Serializable {
@@ -21,6 +22,7 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@ManyToOne
 	private Screening screening;
 	
 	@ManyToOne
@@ -31,6 +33,17 @@ public class Ticket implements Serializable {
 	
 	private String status;
 
+	public Ticket(){
+	    
+	}
+	
+	public Ticket( Screening screening, User user, int seat, SeatStatus status){
+	    this.screening = screening;
+	    this.user = user;
+	    this.seatNumber = seat;
+	    this.status = status.getText();
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +67,14 @@ public class Ticket implements Serializable {
 	public void setSeatNumber(int seatNumber) {
 		this.seatNumber = seatNumber;
 	}
+	
+	 public User getUser() {
+	        return user;
+	    }
+
+	    public void setUser(User user) {
+	        this.user = user;
+	    }
 
 	public SeatStatus getStatus() {
 		return SeatStatus.getType(status);
@@ -94,8 +115,9 @@ public class Ticket implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "Ticket [screening=" + screening + ", seatNumber=" + seatNumber
-				+ ", status=" + status + "]";
-	}
+    public String toString() {
+        return "Ticket [id=" + id + ", screening=" + screening + ", user=" + user + ", seatNumber=" + seatNumber
+                +  "]";
+    }
 }
+
