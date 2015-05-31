@@ -41,8 +41,8 @@ public class UserManager {
 	}
 	
 	@GET
-	@Path("authorised")
-	public Response isAuthorised(){
+	@Path("authorized")
+	public Response isAuthorized(){
 		if(userContext.getCurrentUser() == null){
 			return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
 		}

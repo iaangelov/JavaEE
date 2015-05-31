@@ -42,4 +42,12 @@ public class ScreeningManager {
 		
 		return screeningDAO.getAllScreeningsByHallId(Long.parseLong(hallId));
 	}
+	
+	//change
+		/*@GET
+		@Path("seats/{hallId}")
+	    @Produces("application/json")
+	    public List<Ticket> getAllSeatsinHall(@PathParam("hallId")Long id) {
+	        return hallDAO.findHallById(id).getSeats();
+	    }*/
 }
