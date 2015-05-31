@@ -97,7 +97,8 @@ public class TicketManager {
         public Response reserveTicket(@QueryParam("ticketId") String ticketId){
             Ticket ticketToReserve = ticketDao.findById(Long.parseLong(ticketId));
             if(ticketToReserve != null){
-                ticketDao.buyTicket(ticketToReserve, UserContext.getCurrentUser());
+               //reserveTicket
+            	ticketDao.buyTicket(ticketToReserve, UserContext.getCurrentUser());
             }
             return Response.noContent().build();
         }
