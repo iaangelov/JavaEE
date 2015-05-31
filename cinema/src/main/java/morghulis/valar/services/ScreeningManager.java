@@ -43,6 +43,13 @@ public class ScreeningManager {
 		return screeningDAO.getAllScreeningsByHallId(Long.parseLong(hallId));
 	}
 	
+	@GET
+	@Path("screeningsByMovieId")
+	@Produces("application/json")
+	public Collection<Screening> getScreeningsByMovieId(@QueryParam("movieId") String movieId) {
+		
+		return screeningDAO.getAllScreeningsByMovieId(Long.parseLong(movieId));
+	}
 	//change
 		/*@GET
 		@Path("seats/{hallId}")

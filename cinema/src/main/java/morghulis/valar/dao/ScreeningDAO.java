@@ -44,4 +44,11 @@ public class ScreeningDAO {
 		return em.createQuery("SELECT s FROM Screening s WHERE s.id = :id", Screening.class).
 				setParameter("id", id).getSingleResult();
 	}
+	
+	public List<Screening> getAllScreeningsByMovieId(Long id) {
+		
+		return em.createNamedQuery("allScreeningsByMovieId", Screening.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
 }
