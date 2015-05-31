@@ -20,7 +20,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
 	@NamedQuery(name = "allScreenings", query = "SELECT s FROM Screening s"),
-	@NamedQuery(name = "allScreeningsByHallId", query = "SELECT s FROM Screening s WHERE s.hall.id = :id")
+	@NamedQuery(name = "allScreeningsByHallId", query = "SELECT s FROM Screening s WHERE s.hall.id = :id"),
+	@NamedQuery(name = "allScreeningsByMovieId", query = "SELECT s FROM Screening s WHERE s.movie.id = :id")
 })
 public class Screening implements Serializable {
 
@@ -35,7 +36,7 @@ public class Screening implements Serializable {
 	@ManyToOne
 	private Hall hall;
 	
-	//OneToOne
+	@ManyToOne
 	private Movie movie;
 	
 	@OneToMany
