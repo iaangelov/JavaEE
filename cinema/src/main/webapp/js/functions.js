@@ -1,7 +1,7 @@
 //display login, register or logout links
 function loginControls() {
 	$.ajax({
-		url : 'rest/user/authorised',
+		url : 'rest/user/authorized',
 		type : "GET",
 		dataType : "json",
 		statusCode : {
@@ -77,7 +77,7 @@ function logout() {
 // used to redirect already authorized users who should not access certain pages
 function redirectAuthorised() {
 	$.ajax({
-		url : 'rest/user/authorised',
+		url : 'rest/user/authorized',
 		type : "GET",
 		dataType : "json",
 		statusCode : {

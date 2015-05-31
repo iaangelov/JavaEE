@@ -18,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import morghulis.valar.dao.TicketDAO;
-import morghulis.valar.model.Movie;
 import morghulis.valar.model.Ticket;
 
 @Stateless
@@ -35,7 +34,6 @@ public class TicketManager {
         @Path("all")
         @Produces("application/json")
         public List<Ticket> getAllTickets() {
-            System.out.println(ticketDao.getAllTickets());
             return ticketDao.getAllTickets();
         }
         

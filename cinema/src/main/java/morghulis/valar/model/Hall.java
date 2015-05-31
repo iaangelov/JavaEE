@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -23,9 +24,9 @@ public class Hall implements Serializable {
 	
 	private int hallNumber;
 	
-	//@OneToMany(mappedBy = "hall", cascade = CascadeType.ALL)
-	private List<Ticket> seats;
-
+	@OneToMany
+	private List<Screening> screenings; // new 
+	
 	public Hall() {
 		// TODO Auto-generated constructor stub
 	}
@@ -49,12 +50,13 @@ public class Hall implements Serializable {
 		this.hallNumber = hallNumber;
 	}
 
-	public List<Ticket> getSeats() {
-		return seats;
+	
+	public List<Screening> getScreenings() {
+		return screenings;
 	}
 
-	public void setSeats(List<Ticket> seats) {
-		this.seats = seats;
+	public void setScreenings(List<Screening> screenings) {
+		this.screenings = screenings;
 	}
 
 	@Override
@@ -84,9 +86,10 @@ public class Hall implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Hall [id=" + id + ", hallNumber=" + hallNumber + ", seats="
-				+ seats + "]";
+		return "Hall [id=" + id + ", hallNumber=" + hallNumber
+				+ ", screenings=" + screenings + "]";
 	}
+
 	
 	
 	
