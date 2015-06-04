@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -47,7 +47,8 @@ public class MovieManager {
 
 	@DELETE
 	@Path("remove")
-	@Consumes(MediaType.APPLICATION_JSON)
+	//@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
 	public Response deleteMovie(@QueryParam("movieId") String movieId) {
 		Movie movieToRemove = movieDAO.findById(Long.parseLong(movieId));
 		if (movieToRemove != null) {
@@ -56,9 +57,10 @@ public class MovieManager {
 		return Response.noContent().build();
 	}
 
-	@PUT
+	//@PUT
+	@POST
 	@Path("add")
-	@Consumes(MediaType.APPLICATION_JSON)
+	//@Consumes(MediaType.APPLICATION_JSON)
 	public void addMovie(Movie newMovie) {
 		if (newMovie != null) {
 			movieDAO.addMovie(newMovie);
