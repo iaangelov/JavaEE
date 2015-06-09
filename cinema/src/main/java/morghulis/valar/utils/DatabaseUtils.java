@@ -1,8 +1,6 @@
 package morghulis.valar.utils;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -28,7 +26,7 @@ public class DatabaseUtils {
         new Movie("Frozen"),
         new Movie("Cinderella"),
         new Movie("The Wedding Ringer"),
-        new Movie("Beauty and The Beast"),
+        new Movie("Beauty and the Beast"),
         new Movie("Tangled")};
     
     private static User[] USERS = {
@@ -60,13 +58,7 @@ public class DatabaseUtils {
         new Ticket(Screenings[2], USERS[2], 8, SeatStatus.RESERVED),
         new Ticket(Screenings[2], USERS[2], 9, SeatStatus.TAKEN),
         new Ticket(Screenings[2], USERS[0], 10,SeatStatus.AVAILABLE)
-    };
-   
-    private static List<Ticket> ticketsForHall0 = Arrays.asList(Tickets[0],Tickets[1],Tickets[2]);
-    private static List<Ticket> ticketsForHall1 = Arrays.asList(Tickets[3],Tickets[4],Tickets[5]);
-    private static List<Ticket> ticketsForHall2 = Arrays.asList(Tickets[6],Tickets[7],Tickets[8],Tickets[9]);
-    
-    private static Object[] allTickets = {ticketsForHall0, ticketsForHall1, ticketsForHall2};
+    };    
     
     @PersistenceContext
     private EntityManager em;

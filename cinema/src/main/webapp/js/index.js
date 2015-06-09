@@ -3,13 +3,14 @@ var currentMovie;
 $(document).ready(function () {
 	$('.carousel').carousel();
 	getAllMovies();
-	var index1 = 0;
-	currentMovie = $(".item active").children("#info").children("h1").text();
+	currentMovie = $("#0").find("h1").text();
 	console.log(currentMovie);
+	var index1 = 0;
 	$("#carousel").on('slid.bs.carousel', function() {
 		index1 = $(this).find('.active').index();
 		x = "#" + (index1);
 		currentMovie = $(x).find("h1").text();
+		console.log(currentMovie);
   });	
 }); 
 
@@ -54,7 +55,7 @@ function renderMovie(movie) {
 
 	var itemType = "item";
 	if($("#div").children().size() == 0) {
-		itemType = "active item";
+		itemType = "item active";
 	}
 	var renderMovie = "<div " + "id=" + index + " class=\"" + itemType + "\"><img id=\"poster\" align=\"left\" src=\"" + movie.Poster + "\" class=\"img-rounded\">" +
 	"<div id=\"info\">" +

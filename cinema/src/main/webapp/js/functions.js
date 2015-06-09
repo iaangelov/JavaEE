@@ -16,18 +16,6 @@ function loginControls() {
 	});
 }
 
-//fetch movies from DB and draw table on index page
-function getMovies() {
-	$.ajax({
-		url : 'rest/movie',
-		type : "GET",
-		dataType : "json",
-		success : function(data, textStatus, jqXHR) {
-			drawTable(data);
-		}
-	});
-}
-
 // get user for welcoming message
 function getUserName() {
 	$.ajax({
@@ -43,23 +31,8 @@ function getUserName() {
 	});
 }
 
-function drawTable(data) {
-	var movies = data.movie;
-	for (var i = 0; i < movies.length; i++) {
-		drawRow(movies[i]);
-	}
-}
-
-function drawRow(rowData) {
-	var row = $("<tr />")
-	$("#movies_table").append(row);
-	row.append($("<td>" + rowData.name + "</td>"));
-	row.append($("<td>" + rowData.year + "</td>"));
-	row.append($("<td>" + rowData.genre + "</td>"));
-}
 
 function indexInit(){
-	getMovies();
 	getUserName();
 	loginControls();
 }
