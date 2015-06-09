@@ -24,18 +24,14 @@ public class Movie implements Serializable {
 	private Long id;
 
 	private String name;
-	private int year;
-	private String genre;
 
 	public Movie() {
 		super();
 	}
 
-	public Movie(String name, int year, String genre) {
+	public Movie(String name) {
 		super();
 		this.name = name;
-		this.year = year;
-		this.genre = genre;
 	}
 
 	public Long getId() {
@@ -53,27 +49,10 @@ public class Movie implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getYear() {
-		return year;
-	}
-
-	public void setYear(int year) {
-		this.year = year;
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Movie [name=" + name + ", year=" + year + ", genre=" + genre
-				+ "]";
+		return "Movie [name=" + name + "]";
 	}
 
 	@Override

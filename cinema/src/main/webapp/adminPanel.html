@@ -39,9 +39,6 @@ function drawRow(rowData) {
 	var row = $("<tr />")
 	$("#movies_table").append(row);
 	row.append($("<td>" + rowData.name + "</td>"));
-	row.append($("<td>" + rowData.year + "</td>"));
-	row.append($("<td>" + rowData.genre + "</td>"));
-	
     var remove = $("<td />");
     var link = $("<button>Remove</button>");
     remove.append(link);
@@ -51,7 +48,10 @@ function drawRow(rowData) {
             url: 'rest/movie/remove?movieId=' + rowData.id,
             type: "DELETE",
             dataType: "json",
-            success : getMovies()
+            success : function () {
+            	$("#movies_table").empty();
+            	getMovies();
+			}
 		});
     });
 }
@@ -63,13 +63,8 @@ function drawRow(rowData) {
 <script type="text/javascript">
 function addMovie() {
 	    var name = $("#movieName")[0].value;
-	    var year = $("#movieYear")[0].value;
-	    var genre = $("#genre")[0].value;
-
 	    var data = { movie : {
-	    		name : name,
-	    		year : year,
-	    		genre : genre
+	    		name : name
     			}
 	    }
 	    
@@ -108,8 +103,6 @@ function addMovie() {
 				<table id="movies_table" class="table">
 					<tr>
 						<th>Name</th>
-						<th>Year</th>
-						<th>Genre</th>
 					</tr>
 				</table>
 			</div>
@@ -117,11 +110,6 @@ function addMovie() {
 			<form id="movie_form" class="form-movie-add" role="form" method="post">
 				<input type="text" class="form-control" name="moviename"
 					id="movieName" placeholder="Movie name" required autofocus>
-					<input
-					type="number" class="form-control" name="year" id="movieYear"
-					placeholder="Movie year" required autofocus>
-					<input type="text" class="form-control" name="genre"
-					id="genre" placeholder="Movie genre" required autofocus>
 				<button id="btnAddMovie" class="btn btn-lg btn-primary btn-block"
 					type="button" onclick="addMovie()">Add</button>
 			</form>

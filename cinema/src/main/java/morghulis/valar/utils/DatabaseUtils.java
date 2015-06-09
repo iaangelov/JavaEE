@@ -24,8 +24,12 @@ import morghulis.valar.model.User;
 public class DatabaseUtils {
 
     private static Movie[] Movies= {
-        new Movie("asd", 1999, "horror"),
-        new Movie("qwe", 2000, "aalsld")};
+    	new Movie("Get Hard"),
+        new Movie("Frozen"),
+        new Movie("Cinderella"),
+        new Movie("The Wedding Ringer"),
+        new Movie("Beauty and The Beast"),
+        new Movie("Tangled")};
     
     private static User[] USERS = {
     	new User("user", "user", "email@email", UserType.CUSTOMER),
