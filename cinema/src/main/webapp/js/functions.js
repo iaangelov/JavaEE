@@ -6,11 +6,11 @@ function loginControls() {
 		dataType : "json",
 		statusCode : {
 			200 : function() {
-				$(".login_register").hide();
+				$(".logout").css("display", "inline");
 				isUserAuthenticated = true;
 			},
-			401 : function() {
-				$('.logout').hide();
+			401: function() {
+				$(".login_register").css("display", "inline");
 			}
 		}
 	});
@@ -24,10 +24,9 @@ function getUserName() {
 		dataType : "text"
 	}).always(function(data) {
 		if (typeof data != 'undefined') {
+			$(".welcome-greeting").css("display", "inline");
 			$("#user-holder").text(data);
-		} else {
-			$(".welcome-greeting").hide();
-		}
+		} 
 	});
 }
 

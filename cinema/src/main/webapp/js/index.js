@@ -1,14 +1,13 @@
 var index = 0;
 var currentMovie;
 $(document).ready(function () {
+	indexInit();
 	$('.carousel').carousel();
-	getAllMovies();
-	var index1 = 0;
+	renderAllMovies();
 	$("#carousel").on('slid.bs.carousel', function() {
-		index1 = $(this).find('.active').index();
-		x = "#" + (index1);
-		currentMovie = $(x).find("h1").text();
-		console.log(currentMovie);
+		var currentIndex = $(this).find('.active').index();
+		var currentId = "#" + (currentIndex);
+		currentMovie = $(currentId).find("h1").text();
   });	
 }); 
 
@@ -17,7 +16,8 @@ function enter() {
 		localStorage.setItem("currentMovie", currentMovie);
 		window.location="test.html";
 }
-function getAllMovies() {
+
+function renderAllMovies() {
 
 	$.ajax({
 		url: "rest/movie",

@@ -14,9 +14,6 @@
 <link rel="stylesheet" type="text/css" href="styles/index.css">
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
- <script type="text/javascript">
-        $(document).ready(indexInit())
- </script>
 </head>
 <body>
 
@@ -33,10 +30,10 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                 <ul id="welcomeMessage" class="nav navbar-nav welcome-greeting" style="float:left; color:gray; margin-top:15px;">
+                 <ul id="welcomeMessage" class="nav navbar-nav welcome-greeting" style="float:left; color:gray; margin-top:15px; display: none;">
             	<li> Welcome, <span id="user-holder"></span>!</li>
             </ul>
-                <ul id="loginRegisterLink" style="float:right;" class="nav navbar-nav login_register">
+                <ul id="loginRegisterLink" style="float:right; display: none;" class="nav navbar-nav login_register">
                     <li>
                         <a href="login.html">Login</a>
                     </li>
@@ -44,7 +41,7 @@
                         <a href="register.html">Register</a>
                     </li>
                 </ul>
-                <ul id="logoutLink" style="float:right;" class="nav navbar-nav logout">
+                <ul id="logoutLink" style="float:right; display: none;" class="nav navbar-nav logout">
                 	<li>
  					    <a onclick="logout()" href="#"> Logout </a>
                 	</li>
