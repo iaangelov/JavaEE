@@ -3,8 +3,6 @@ var currentMovie;
 $(document).ready(function () {
 	$('.carousel').carousel();
 	getAllMovies();
-	currentMovie = $("#0").find("h1").text();
-	console.log(currentMovie);
 	var index1 = 0;
 	$("#carousel").on('slid.bs.carousel', function() {
 		index1 = $(this).find('.active').index();
@@ -56,6 +54,9 @@ function renderMovie(movie) {
 	var itemType = "item";
 	if($("#div").children().size() == 0) {
 		itemType = "item active";
+	}
+	if(index == 0) {
+		currentMovie = movie.Title;
 	}
 	var renderMovie = "<div " + "id=" + index + " class=\"" + itemType + "\"><img id=\"poster\" align=\"left\" src=\"" + movie.Poster + "\" class=\"img-rounded\">" +
 	"<div id=\"info\">" +
