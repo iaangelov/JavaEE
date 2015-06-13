@@ -2,6 +2,7 @@ body {
 
 	background-image: url(../images/Cinema.jpg);
 	background-size: cover;
+	overflow: hidden;
 }
 
 img#poster {
