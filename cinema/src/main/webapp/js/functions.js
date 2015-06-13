@@ -6,8 +6,11 @@ function loginControls() {
 		dataType : "json",
 		statusCode : {
 			200 : function() {
-				$(".logout").css("display", "inline");
-				isUserAuthenticated = true;
+				if (getCurrentUserType() === "Administrator") {
+					$('<li><a href="adminPanel.html">Admin panel</a></li>')
+							.prependTo("#navelems");
+				}
+				$(".navigation").css("display", "inline");
 			},
 			401 : function() {
 				$(".login_register").css("display", "inline");
@@ -30,7 +33,21 @@ function getUserName() {
 	});
 }
 
-//show error and success messages on the index page 
+function getCurrentUserType() {
+	var type = "";
+	$.ajax({
+		url : 'rest/user/type',
+		async : false,
+		type : "GET",
+		dataType : "text",
+		success : function(data) {
+			type = data;
+		}
+	});
+	return type;
+}
+
+// show error and success messages on the index page
 function showMessage(ElementID) {
 	$(ElementID).css({
 		'width' : '40%',
@@ -67,7 +84,7 @@ function register() {
 	$.ajax({
 		url : 'rest/user',
 		type : "POST",
-		async: false,
+		async : false,
 		contentType : "application/json;charset=UTF-8",
 		data : JSON.stringify(data)
 	}).success(function(data) {
@@ -113,7 +130,7 @@ function login() {
 	$.ajax({
 		url : 'rest/user/login',
 		type : "POST",
-		async: false,
+		async : false,
 		contentType : "application/json;charset=UTF-8",
 		data : JSON.stringify(data),
 		statusCode : {
