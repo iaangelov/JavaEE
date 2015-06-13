@@ -3,6 +3,7 @@
 # Съдържание
 * [Въведение](#intro)
 * [Изисквания към функционалността](#requirements)
+* [Демо](#demo)
 * [Екип](#team-members)
 
 
@@ -55,6 +56,8 @@
 които са в процес на резервация (блокирани, но не и продадени), не трябва да се
 записват.</br>
 
+# <a name="demo"></a>Демо
+> Soon
  
 # <a name="team-members"></a>Екип
 * Ivan Angelov <https://github.com/iaangelov>
