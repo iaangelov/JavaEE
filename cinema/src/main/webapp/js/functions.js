@@ -38,6 +38,7 @@ function getCurrentUserType() {
 	$.ajax({
 		url : 'rest/user/type',
 		type : "GET",
+		async : false,
 		dataType : "text",
 		success : function(data) {
 			type = data;
