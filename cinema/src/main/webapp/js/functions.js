@@ -19,6 +19,23 @@ function loginControls() {
 	});
 }
 
+function redirectUnauthorized(){
+	$.ajax({
+		url : 'rest/user/authorized',
+		type : "GET",
+		dataType : "json",
+		statusCode : {
+			200 : function() {
+
+			},
+			401 : function() {
+				window.location.replace("index.html")
+			}
+		}
+	});
+}
+
+
 // get user for welcoming message
 function getUserName() {
 	$.ajax({

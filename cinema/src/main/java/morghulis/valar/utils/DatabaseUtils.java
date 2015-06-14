@@ -60,7 +60,7 @@ public class DatabaseUtils {
         new Ticket(Screenings[1], USERS[1], 5, SeatStatus.TAKEN),
         new Ticket(Screenings[1], USERS[1], 6, SeatStatus.AVAILABLE),
         new Ticket(Screenings[2], USERS[2], 7, SeatStatus.AVAILABLE),
-        new Ticket(Screenings[2], USERS[2], 8, SeatStatus.RESERVED),
+        new Ticket(Screenings[1], USERS[2], 8, SeatStatus.RESERVED),
         new Ticket(Screenings[2], USERS[2], 9, SeatStatus.TAKEN),
         new Ticket(Screenings[2], USERS[0], 10,SeatStatus.AVAILABLE)
     };    

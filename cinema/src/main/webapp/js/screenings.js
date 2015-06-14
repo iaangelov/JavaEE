@@ -41,7 +41,7 @@ function renderScreening(screening) {
 	$("#screenings_body").append("<tr>" +
 			"<td>" + screeningDate.toLocaleString() + "</td>" +
 			"<td id=" + index + ">" + screening.hall.hallNumber + "</td>" +
-			"<td>10.00$</td>" +
+			"<td>10.00лв</td>" +
 			"<td><a id=" + index + " onClick=\"enter(this.id)\" class=\"btn btn-lg btn-primary btn-sm\" href=\"#\" role=\"button\">Reserve Seats</a></td>" +
 			"</tr>");
 	index++;
