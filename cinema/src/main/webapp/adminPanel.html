@@ -7,7 +7,18 @@
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/adminPanel.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="js/adminPanel.js"></script>
+
 <script>
 	$(function() {
 		$("#tabs").tabs();
@@ -15,79 +26,8 @@
 </script>
 
 <script type="text/javascript">
-function getMovies() {
-	$.ajax({
-		url : 'rest/movie',
-		type : "GET",
-		dataType : "json",
-		success : function(data, textStatus, jqXHR) {
-			drawTable(data);
-		}
-	});
-}
-
-//needs better solution
-function drawTable(data) {
-	var movies = data.movie;
-	for (var i = 0; i < movies.length; i++) {
-		drawRow(movies[i]);
-	}
-}
-
-//Added button to be removed
-function drawRow(rowData) {
-	var row = $("<tr />")
-	$("#movies_table").append(row);
-	row.append($("<td>" + rowData.name + "</td>"));
-    var remove = $("<td />");
-    var link = $("<button>Remove</button>");
-    remove.append(link);
-    row.append(remove);
-    link.click(function() {
-        $.ajax({
-            url: 'rest/movie/remove?movieId=' + rowData.id,
-            type: "DELETE",
-            dataType: "json",
-            success : function () {
-            	$("#movies_table").empty();
-            	getMovies();
-			}
-		});
-    });
-}
-</script>
-
-<script type="text/javascript">
 	$(document).ready(getMovies())
 </script>
-<script type="text/javascript">
-function addMovie() {
-	    var name = $("#movieName")[0].value;
-	    var data = { movie : {
-	    		name : name
-    			}
-	    }
-	    
-		$.ajax({
-		 	url : 'rest/movie/add',
-		    type: "POST",
-		    contentType: "application/json;charset=UTF-8",
-		    data: JSON.stringify(data)
-		})
-		.success(function(data) {
-		    $("#admin_form").attr("action", "adminPanel.html");
-		})
-		.fail(function(data) {
-		   alert("Something went wrong");
-
-		})
-		.always(function() {
-                    $("#movie_form").submit();
-        });
-    }
-    
-    </script>
-    
 
 </head>
 
