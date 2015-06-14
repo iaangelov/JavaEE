@@ -45,10 +45,10 @@ public class ScreeningDAO {
 				setParameter("id", id).getSingleResult();
 	}
 	
-	public List<Screening> getAllScreeningsByMovieId(Long id) {
+	public List<Screening> getAllScreeningsByMovieName(String name) {
 		
-		return em.createNamedQuery("allScreeningsByMovieId", Screening.class)
-				.setParameter("id", id)
+		return em.createNamedQuery("allScreeningsByMovieName", Screening.class)
+				.setParameter("name", name)
 				.getResultList();
 	}
 }

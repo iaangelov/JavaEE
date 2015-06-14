@@ -14,7 +14,7 @@ $(document).ready(function () {
 function enter() {
 	
 		localStorage.setItem("currentMovie", currentMovie);
-		window.location="test.html";
+		window.location="screenings.html";
 }
 
 function renderAllMovies() {

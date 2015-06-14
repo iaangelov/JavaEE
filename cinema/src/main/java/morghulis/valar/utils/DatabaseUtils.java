@@ -1,5 +1,6 @@
 package morghulis.valar.utils;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.ejb.EJB;
@@ -42,9 +43,13 @@ public class DatabaseUtils {
     };
     
     private static Screening[] Screenings = {
-    	new Screening(Halls[0], Movies[0], new Date()),
-    	new Screening(Halls[1], Movies[1], new Date()),
-    	new Screening(Halls[2], Movies[1], new Date())
+    	new Screening(Halls[0], Movies[0], Calendar.getInstance()),
+    	new Screening(Halls[1], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance())
     };
     
     private static Ticket[] Tickets = {

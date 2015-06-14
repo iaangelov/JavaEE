@@ -1,6 +1,7 @@
 package morghulis.valar.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
 	@NamedQuery(name = "allScreenings", query = "SELECT s FROM Screening s"),
 	@NamedQuery(name = "allScreeningsByHallId", query = "SELECT s FROM Screening s WHERE s.hall.id = :id"),
-	@NamedQuery(name = "allScreeningsByMovieId", query = "SELECT s FROM Screening s WHERE s.movie.id = :id")
+	@NamedQuery(name = "allScreeningsByMovieName", query = "SELECT s FROM Screening s WHERE s.movie.name = :name")
 })
 public class Screening implements Serializable {
 
@@ -31,8 +32,8 @@ public class Screening implements Serializable {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Temporal(TemporalType.DATE)
-	private Date screeningDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar screeningDate;
 	@ManyToOne
 	private Hall hall;
 	
@@ -46,7 +47,7 @@ public class Screening implements Serializable {
 	public Screening() {
 		super();
 	}
-	public Screening(Hall hall, Movie movie, Date screeningDate) {
+	public Screening(Hall hall, Movie movie, Calendar screeningDate) {
 		super();
 		this.hall = hall;
 		this.movie = movie;
@@ -59,10 +60,10 @@ public class Screening implements Serializable {
 		this.id = id;
 	}
 	
-	public Date getScreeningDate() {
+	public Calendar getScreeningDate() {
 		return screeningDate;
 	}
-	public void setScreeningDate(Date screeningDate) {
+	public void setScreeningDate(Calendar screeningDate) {
 		this.screeningDate = screeningDate;
 	}
 	public Hall getHall() {
