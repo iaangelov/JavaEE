@@ -69,7 +69,7 @@ public class ScreeningManager {
 	
 	@POST
 	@Path("add")
-	@Consumes(MediaType.TEXT_PLAIN)
+	//@Consumes(MediaType.TEXT_PLAIN)
 	public void addScreening(Screening screening) {
 		
 		if(screening != null) {

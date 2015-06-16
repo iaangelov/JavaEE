@@ -66,7 +66,7 @@ function drawRow(rowData) {
 	row.append($("<td>" + rowData.name + "</td>"));
     var remove = $("<td />");
     var link = $("<button class=\"btn btn-lg btn-primary btn-sm\">Remove</button>");
-    var screenings = $("<button class=\"btn btn-lg btn-primary btn-sm\" onClick=\"scrBtnAct()\" >Show Screenings</button>");
+    var screenings = $("<button class=\"btn btn-lg btn-primary btn-sm\">Show Screenings</button>");
     remove.append(link);
     remove.append(screenings);
     row.append(remove);
@@ -83,9 +83,13 @@ function drawRow(rowData) {
 			}
 		});
     });
+    screenings.click(function() {
+    	localStorage.setItem("currentMovie",rowData.name);
+    	window.location="screeningsManager.html";
+    });
 }
 
-function scrBtnAct(movie) {
+function scrBtnAct(currentMovie) {
 	localStorage.setItem("currentMovie",currentMovie);
 	window.location="screeningsManager.html";
 }
