@@ -1,6 +1,7 @@
 package morghulis.valar.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -29,11 +30,15 @@ public class User implements Serializable {
 	private String email;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Ticket> tickets;
+	private List<Ticket> tickets = new ArrayList<Ticket>(50);
 	
 	private String userType;
 
 	public User() {
+		this.username = "";
+		this.password = "";
+		this.email = "";
+		this.userType = UserType.CUSTOMER.getText();
 	}
 
 	public User(String username, String password, String email, UserType userType) {

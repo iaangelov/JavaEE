@@ -53,11 +53,11 @@
 				showMessage("#loginFail");
 			});
 		}
-		
+
 		$(".alert-success").delay(2000).slideUp(500, function() {
-		    $(this).alert('close');
+			$(this).alert('close');
 		});
-		
+
 	});
 </script>
 <body>
@@ -83,8 +83,10 @@
 				</ul>
 				<ul id="loginRegisterLink" style="float: right; display: none;"
 					class="nav navbar-nav login_register">
-					<li><a href="#loginmodal" id="modaltriggerlogin" rel="leanModal">Login</a></li>
-					<li><a href="#registermodal" id="modaltriggerregister" rel="leanModal">Register</a></li>
+					<li><a href="#loginmodal" id="modaltriggerlogin"
+						rel="leanModal">Login</a></li>
+					<li><a href="#registermodal" id="modaltriggerregister"
+						rel="leanModal">Register</a></li>
 				</ul>
 
 				<div id="loginmodal" style="display: none;">
@@ -139,7 +141,7 @@
 							overlay : 0.45,
 							closeButton : ".hidemodal"
 						});
-						
+
 					});
 				</script>
 				<ul id="navelems" style="float: right; display: none;"

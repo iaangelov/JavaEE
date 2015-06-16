@@ -1,7 +1,6 @@
 package morghulis.valar.utils;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

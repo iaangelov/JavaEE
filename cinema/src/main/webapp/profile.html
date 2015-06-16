@@ -24,8 +24,8 @@
 			src="js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" charset="utf-8"
 			src="js/tickets.js"></script>
-	<script type="text/javascript" charset="utf-8"
-			src="https://raw.githubusercontent.com/phstc/jquery-dateFormat/master/dist/jquery-dateFormat.min.js"></script>
+	<script type="text/javascript"
+			src="js/jquery-dateFormat.min.js"></script>
 	<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -65,6 +65,7 @@
 			</ul>
 			<ul id="navelems" style="float: right; display: none;"
 				class="nav navbar-nav navigation">
+				<li><a href="index.html">Home</a></li>
 				<li><a href="profile.html">My profile</a></li>
 				<li><a onclick="logout()" href="#"> Logout </a></li>
 			</ul>
@@ -83,7 +84,7 @@
 			<th id="movieName">Movie</th>
 			<th id="hallNum">Hall</th>
 			<th id="date">Date</th>
-			<th id="seat">Seat</th>
+			<th id="status">Status</th>
 		</tr>
 		</thead>
 		<tbody id="tickets_body"></tbody>

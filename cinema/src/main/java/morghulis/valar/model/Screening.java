@@ -1,10 +1,12 @@
 package morghulis.valar.model;
 
 import java.io.Serializable;
+import java.security.AllPermission;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -41,7 +43,7 @@ public class Screening implements Serializable {
 	@ManyToOne
 	private Movie movie;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Ticket> tickets; //new ArrayList()
 	
 	
@@ -53,6 +55,7 @@ public class Screening implements Serializable {
 		this.hall = hall;
 		this.movie = movie;
 		this.screeningDate = screeningDate;
+
 	}
 	public Long getId() {
 		return id;

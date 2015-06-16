@@ -1,7 +1,3 @@
-/**
- * Created by Dimitar Panayotov on 14-Jun-15.
- */
-
 function getMyTickets(){
     var data = "";
     $.ajax({
@@ -13,6 +9,25 @@ function getMyTickets(){
         }
     });
     return data;
+}
+
+function reserveTicket(ticketId){
+	var link = $("#reserve");
+	link.click(function() {
+		$.ajax({
+			url : 'rest/ticket/reserveTicket?ticketId=' + ticketId,
+			type : "PUT",
+			dataType : "json",
+			success : function(){
+				showMessage("#reserveSuccess");
+				/*<div id="reserveSuccess" class="alert alert-success fade in"
+					style="display: none">
+					<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Success!</strong>
+					Your ticket will be reserved for 10 minutes!
+				</div>*/
+			}
+		});
+	});
 }
 
 function getAllTickets(){
@@ -41,6 +56,6 @@ function renderRow(rowData) {
     row.append($("<td>" + rowData.screening.movie.name + "</td>"));
     row.append($("<td>" + rowData.screening.hall.hallNumber + "</td>"));
     row.append($("<td>" + screeningDate + "</td>"));
-    row.append($("<td>" + rowData.seatNumber + "</td>"));
+    row.append($("<td>" + rowData.status + "</td>"));
 
 }
