@@ -4,11 +4,16 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import morghulis.valar.dao.ScreeningDAO;
 import morghulis.valar.model.Screening;
@@ -51,5 +56,25 @@ public class ScreeningManager {
 		return screeningDAO.getAllScreeningsByMovieName(movieName);
 	}
 	
+	@DELETE
+	@Path("remove")
+	@Consumes(MediaType.TEXT_PLAIN)
+	public Response deleteScreening(@QueryParam("id") String id) {
+		Screening screening = screeningDAO.findScreeningById(Long.parseLong(id));
+		if(screening != null) {
+			screeningDAO.remove(screening);
+		}
+		return Response.noContent().build();
+	}
+	
+	@POST
+	@Path("add")
+	@Consumes(MediaType.TEXT_PLAIN)
+	public void addScreening(Screening screening) {
+		
+		if(screening != null) {
+			screeningDAO.add(screening);
+		}
+	}
 	
 }

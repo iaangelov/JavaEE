@@ -19,13 +19,9 @@ public class ScreeningDAO {
 		em.persist(screening);
 	}
 	
-	public void remove(Long id) {
+	public void remove(Screening screeningToRemove) {
 		
-		Screening foundScreening = em.find(Screening.class, id);
-		if(foundScreening != null) {
-			
-			em.remove(foundScreening);
-		}
+		em.remove(screeningToRemove);
 	}
 	
 	public List<Screening> getAllScreenings() {
