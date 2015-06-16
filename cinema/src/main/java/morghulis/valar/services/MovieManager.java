@@ -47,7 +47,6 @@ public class MovieManager {
 
 	@DELETE
 	@Path("remove")
-	//@Consumes(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.TEXT_PLAIN)
 	public Response deleteMovie(@QueryParam("movieId") String movieId) {
 		Movie movieToRemove = movieDAO.findById(Long.parseLong(movieId));
