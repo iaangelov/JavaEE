@@ -44,6 +44,7 @@
 		<ul>
 			<li><a href="#moviesTab">Movies</a></li>
 			<li><a href="#usersTab">Users</a></li>
+			<li><a href="#ticketsTab">Tickets</a></li>
 		</ul>
 		<div id="moviesTab">
 			<div style="height: 420px; overflow: auto;">
@@ -67,6 +68,7 @@
 			<div style="height: 420px; overflow: auto;">
 				<table id="users_table" class="table">
 					<tr>
+						<th>Id</th>
 						<th>User name</th>
 						<th>Email</th>
 						<th>User type</th>
@@ -74,6 +76,30 @@
 				</table>
 			</div>
 		</div>
+
+
+		<div id="ticketsTab">
+		
+		<form id="search_user_form" class="form-user-search" role="form"
+				method="get">
+				<input type="text" class="form-control" name="userId"
+					id="userId" placeholder="User Id" required autofocus>
+				<button id="btnFindTickets" class="btn btn-lg btn-primary btn-block"
+					type="button" onclick="findTickets()">Find Tickets</button>
+			</form>	
+		
+			<div style="height: 420px; overflow: auto;">
+				<table id="tickets_table" class="table">
+					<tr>
+						<th>Screening</th>
+						<th>User</th>
+						<th>Seat number</th>
+						<th>Status</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+
 
 	</div>
 
@@ -98,17 +124,17 @@
 					<li>Welcome, <span id="user-holder"></span>!
 					</li>
 				</ul>
-				
-			
-			<ul id="navelems" style="float: right; display: none;"
-				class="nav navbar-nav navigation">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="profile.html">My profile</a></li>
-				<li><a onclick="logout()" href="#"> Logout </a></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-		<!-- /.container -->
+
+
+				<ul id="navelems" style="float: right; display: none;"
+					class="nav navbar-nav navigation">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="profile.html">My profile</a></li>
+					<li><a onclick="logout()" href="#"> Logout </a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+			<!-- /.container -->
 		</div>
 	</nav>
 

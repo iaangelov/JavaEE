@@ -30,6 +30,7 @@ function drawUsersTable(data) {
 function drawUserRow(rowData) {
 	var row = $("<tr />")
 	$("#users_table").append(row);
+	row.append($("<td>" + rowData.id + "</td>"));
 	row.append($("<td>" + rowData.username + "</td>"));
 	row.append($("<td>" + rowData.email + "</td>"));
 	row.append($("<td>" + rowData.userType + "</td>"));
@@ -118,3 +119,57 @@ function addMovie() {
                     $("#movie_form").submit();
         });
     }
+
+function findTickets() {
+	var id = $("#userId")[0].value;
+	$.ajax({
+        url: 'rest/ticket/byUserId/' + id,
+        type: "GET",
+        dataType: "json",
+        success : function (data) {
+        	$("#tickets_table").empty();
+        	var row = $("<th>Screening</th>" +
+			"<th>User</th>" +
+			"<th>Seat number</th>" +
+			"<th>Status</th>");
+        	$("#tickets_table").prepend(row);
+        	renderTickets(data);
+		}
+	});
+}
+
+function renderTickets(data) {
+		var tickets = data.ticket;
+		for (var i = 0; i < tickets.length; i++) {
+			drawTicketRow(tickets[i]);
+		}
+	}
+
+	function drawTicketRow(rowData) {
+		var row = $("<tr />")
+		$("#tickets_table").append(row);
+		row.append($("<td>" + rowData.screening.hall.hallNumber +"," + rowData.screening.movie.name + "</td>"));
+		row.append($("<td>" + rowData.user.username + "</td>"));
+		row.append($("<td>" + rowData.seatNumber + "</td>"));
+		row.append($("<td>" + rowData.status + "</td>"));
+		var remove = $("<td />");
+		var link = $("<button class=\"btn btn-lg btn-primary btn-sm\">Remove</button>");
+	    remove.append(link);
+	    row.append(remove);
+	    link.click(function() {
+	        $.ajax({
+	            url: 'rest/ticket/remove?ticketId=' + rowData.id,
+	            type: "DELETE",
+	            dataType: "json",
+	            success : function () {
+	            	$("#tickets_table").empty();
+	            	var row = $("<th>Screening</th>" +
+	            			"<th>User</th>" +
+	            			"<th>Seat number</th>" +
+	            			"<th>Status</th>");
+	            	$("#tickets_table").prepend(row);
+	            	findTickets();
+				}
+			});
+	    });
+}
