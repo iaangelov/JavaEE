@@ -101,6 +101,7 @@ td {
 #place a {
 	
 	font-size: 0.6em;
+	display: none;
 }
 
 #place li {
