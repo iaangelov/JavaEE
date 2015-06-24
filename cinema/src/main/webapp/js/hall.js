@@ -44,13 +44,21 @@ function requestAllSeats() {
 				};
 
 				var init = function(reservedSeat) {
-					var str = [], seatNo, className;
+					var str = [], seatNo, className,k = 1;
 					for (i = 0; i < settings.rows; i++) {
 						for (j = 0; j < settings.cols; j++) {
 							if (j == 0 || j == 1) {
 								continue;
 							}
 							if (i == settings.rows / 2) {
+//								'<li style="top:'
+//								+ (i * settings.seatHeight).toString()
+//								+ 'px;left:'
+//								+ (j * settings.seatWidth).toString()
+//								+ 'px">' + '">'
+//								+ 'hello'
+//								+ '</li>'
+//								k++;
 								continue;
 							}
 							seatNo = (i + j * settings.rows + 1);
@@ -126,7 +134,12 @@ function requestAllSeats() {
 							});
 							console.log(str);
 							console.log(bookedSeatsIds);
-							alert("Buy tickets successful!");
+							if(undefined != item){
+								alert("Buy tickets successful!");
+							}
+							else {
+								alert("No seats are currently selected.");
+							}
 						});	
 				
 				$('#btnAddReservations').click(
@@ -145,7 +158,14 @@ function requestAllSeats() {
 								$(this).toggleClass(settings.selectedSeatCss);
 								console.log(this);
 							});		
-							alert("Success! Please confirm your reservation within 10 minutes or it will be deleted!");
+
+							console.log(item);
+							if(undefined != item){
+								alert("Success! Please confirm your reservation within 10 minutes or it will be deleted!");
+							}
+							else {
+								alert("No seats are currently selected.");
+							}
 						});	
 				
 
@@ -157,10 +177,10 @@ function requestAllSeats() {
 							    contentType: "application/json;charset=UTF-8",
 							})
 							.success(function(data) {
-								alert("You've successfully cofirmed your reservation");
+								alert("You've successfully cofirmed your pending reservations.");
 							})
 							.fail(function(data) {
-							   alert("Something went wrong");
+							   alert("Something went wrong.");
 
 							})		
 						});
