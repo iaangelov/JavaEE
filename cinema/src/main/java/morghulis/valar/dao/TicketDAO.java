@@ -65,7 +65,6 @@ public class TicketDAO {
 	public Collection<Ticket> findTicketsByUserId(long... userId) {
 		List<Ticket> tickets = null;
 		String textQuery = "select t from Ticket t where t.user.id =: userId";
-
 		if (userContext.getCurrentUser().getUserType()
 				.equals(UserType.ADMINISTRATOR)
 				&& userId.length != 0) {
@@ -108,27 +107,42 @@ public class TicketDAO {
 	// return queryTicket(query);
 	// }
 	//
-	public void buyTicket(Ticket ticket, User userWhoBuysTicket) {
-
+	public void buyTicket(Ticket ticket, User user) {
+		//System.out.println(user!=null);
 		Ticket ticketToBuy = findById(ticket.getId());
-
-		if (ticket.getStatus().equals(SeatStatus.AVAILABLE)) {
+		User userWhoBuysTicket = userDao.findByUsername(user.getUsername());
+		//System.out.println(ticket);
+		//System.out.println(userWhoBuysTicket);
+		try{
+			if (ticket.getStatus().equals(SeatStatus.AVAILABLE)) {
+				ticketToBuy.setStatus(SeatStatus.TAKEN);
+				ticketToBuy.setUser(userWhoBuysTicket);
+				userWhoBuysTicket.getTickets().add(ticketToBuy);
+			}
+			else if (ticket.getStatus().equals(SeatStatus.RESERVED)) {
+				ticketToBuy.setStatus(SeatStatus.TAKEN);
+			}
+		}catch (NullPointerException ex){
 			ticketToBuy.setStatus(SeatStatus.TAKEN);
 			ticketToBuy.setUser(userWhoBuysTicket);
 			userWhoBuysTicket.getTickets().add(ticketToBuy);
 		}
-
-		else if (ticket.getStatus().equals(SeatStatus.RESERVED)) {
-			ticketToBuy.setStatus(SeatStatus.TAKEN);
-		}
-
 	}
 
 	public void reserveTicket(Ticket ticket, User user) {
+		Ticket ticketToReserve = findById(ticket.getId());
 		User userFromDB = userDao.findById(user.getId());
+		try {
 		if (ticket.getStatus().equals(SeatStatus.AVAILABLE)) {
-			Ticket ticketToReserve = findById(ticket.getId());
 			ticketToReserve.setStatus(SeatStatus.RESERVED);
+			ticketToReserve.setUser(user);
+			userFromDB.getTickets().add(ticketToReserve);
+			this.reserved.add(ticketToReserve);
+			timerService.createTimer(600_000, "reserved ticket");
+			}
+		}
+		catch(NullPointerException ex){
+			ticket.setStatus(SeatStatus.RESERVED);
 			ticketToReserve.setUser(user);
 			userFromDB.getTickets().add(ticketToReserve);
 			this.reserved.add(ticketToReserve);

@@ -1,5 +1,6 @@
 package morghulis.valar.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,6 +19,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import morghulis.valar.dao.ScreeningDAO;
 import morghulis.valar.dao.TicketDAO;
 import morghulis.valar.model.Ticket;
 
@@ -27,6 +30,9 @@ public class TicketManager {
         @EJB
         private TicketDAO ticketDao;
        
+        @EJB
+        private ScreeningDAO screeningDao;
+        
         @Inject
         private UserContext UserContext;
        
@@ -37,19 +43,46 @@ public class TicketManager {
             return ticketDao.getAllTickets();
         }
         
-        @PUT
+        @POST
     	@Path("add")
-    	@Consumes(MediaType.APPLICATION_JSON)
-    	public void addMovie(Ticket newTicket) {
+    	public void addTicket(Ticket newTicket) {
     		if (newTicket != null) {
     			ticketDao.addTicket(newTicket);
     		}
     	}
         
+        @POST
+    	@Path("addAndBuy")
+    	public Response addAndBuy(Ticket newTicket) {
+    		if (newTicket != null) {
+    			newTicket.setScreening(screeningDao.findScreeningById(newTicket.getScreening().getId()));
+    			ticketDao.addTicket(newTicket);
+    		//	System.out.println("coning from post " + UserContext.getCurrentUser() == null);
+    			ticketDao.buyTicket(newTicket, UserContext.getCurrentUser());
+    			return Response.ok().build();
+    		}
+    		return Response.noContent().build();
+    		
+    	}
+        
+        @POST
+    	@Path("addAndReserve")
+    	public Response addAndReserve(Ticket newTicket) {
+    		if (newTicket != null) {
+    			newTicket.setScreening(screeningDao.findScreeningById(newTicket.getScreening().getId()));
+    			ticketDao.addTicket(newTicket);
+    		//	System.out.println("coning from post " + UserContext.getCurrentUser() == null);
+    			ticketDao.reserveTicket(newTicket, UserContext.getCurrentUser());
+    			return Response.ok().build();
+    		}
+    		return Response.noContent().build();
+    		
+    	}
+        
         @DELETE
     	@Path("remove")
     	@Consumes(MediaType.APPLICATION_JSON)
-    	public Response deleteMovie(@QueryParam("ticketId") String ticketId) {
+    	public Response deleteTicket(@QueryParam("ticketId") String ticketId) {
     		Ticket ticketToRemove = ticketDao.findById(Long.parseLong(ticketId));
     		if (ticketToRemove != null) {
     			ticketDao.deleteTicket(ticketToRemove.getId());
@@ -63,7 +96,12 @@ public class TicketManager {
         @Path("/byUserId/{userId}")
         @Produces("application/json")
         public Collection<Ticket> getTicketsByUserId(@PathParam("userId") Long id){
-                return ticketDao.findTicketsByUserId(id);
+        	try{
+            	Collection<Ticket> findTicketsByUserId = ticketDao.findTicketsByUserId();
+            	} catch(NullPointerException ex){
+            		//throw new NullPointerException();
+            	}
+                    return new ArrayList<Ticket>();
         }
        
         //tova e za customeri da si vidqt tehnite bileti.. 
@@ -72,7 +110,12 @@ public class TicketManager {
         @Path("/mytickets")
         @Produces("application/json")
         public Collection<Ticket> getMyTickets(){
-                return ticketDao.findTicketsByUserId();
+        	//try{
+        	Collection<Ticket> findTicketsByUserId = ticketDao.findTicketsByUserId();
+        	//} catch(NullPointerException ex){
+        		//throw new NullPointerException();
+        	//}
+                return findTicketsByUserId;
         }
         
         @GET
@@ -101,6 +144,17 @@ public class TicketManager {
             	return Response.ok().build();
             }
             return Response.noContent().build();
+        }
+        
+        @GET
+        @Path("/test/{ticketId}")
+        @Produces("application/json")
+        public Ticket getById(@PathParam("ticketId") Long id){
+        	//Ticket findById = null;
+        
+               // findById = ticketDao.findById(id);
+        	//return findById;
+                return ticketDao.getAllTickets().get(0);
         }
        
 }

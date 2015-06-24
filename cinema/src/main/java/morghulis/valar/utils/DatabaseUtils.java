@@ -52,16 +52,16 @@ public class DatabaseUtils {
     };
     
     private static Ticket[] Tickets = {
-        new Ticket(Screenings[0], USERS[0], 1, SeatStatus.AVAILABLE),
-        new Ticket(Screenings[0], USERS[0], 2, SeatStatus.RESERVED),
-        new Ticket(Screenings[0], USERS[0], 3, SeatStatus.TAKEN),
-        new Ticket(Screenings[1], USERS[1], 4, SeatStatus.RESERVED),
-        new Ticket(Screenings[1], USERS[1], 5, SeatStatus.TAKEN),
-        new Ticket(Screenings[1], USERS[1], 6, SeatStatus.AVAILABLE),
-        new Ticket(Screenings[2], USERS[2], 7, SeatStatus.AVAILABLE),
-        new Ticket(Screenings[1], USERS[2], 8, SeatStatus.RESERVED),
-        new Ticket(Screenings[2], USERS[2], 9, SeatStatus.TAKEN),
-        new Ticket(Screenings[2], USERS[0], 10,SeatStatus.AVAILABLE)
+        new Ticket(Screenings[0], USERS[0], 244, SeatStatus.TAKEN),
+        new Ticket(Screenings[0], USERS[0], 245, SeatStatus.RESERVED),
+        new Ticket(Screenings[0], USERS[0], 246, SeatStatus.TAKEN),
+        new Ticket(Screenings[1], USERS[1], 300, SeatStatus.RESERVED),
+        new Ticket(Screenings[1], USERS[1], 247, SeatStatus.TAKEN),
+        new Ticket(Screenings[1], USERS[1], 248, SeatStatus.TAKEN),
+        new Ticket(Screenings[2], USERS[2], 387, SeatStatus.TAKEN),
+        new Ticket(Screenings[1], USERS[2], 388, SeatStatus.RESERVED),
+        new Ticket(Screenings[2], USERS[2], 316, SeatStatus.TAKEN),
+        new Ticket(Screenings[2], USERS[0], 317,SeatStatus.TAKEN)
     };    
     
     @PersistenceContext

@@ -107,7 +107,7 @@ public class Screening implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Screening [hall=" + hall + ", movie=" + movie + "]";
+		return "Screening [ Id=" + id + "hall=" + hall + ", movie=" + movie + "]";
 	}
 	
 	
