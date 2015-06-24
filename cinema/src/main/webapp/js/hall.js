@@ -151,7 +151,18 @@ function requestAllSeats() {
 
 				$('#btnConfirm').click(
 						function() {
-							alert("no functionality added yet");
+							$.ajax({
+							 	url : 'rest/ticket/confirmReservation',
+							    type: "POST",
+							    contentType: "application/json;charset=UTF-8",
+							})
+							.success(function(data) {
+								alert("You've successfully cofirmed your reservation");
+							})
+							.fail(function(data) {
+							   alert("Something went wrong");
+
+							})		
 						});
 				
 
@@ -177,15 +188,16 @@ function requestAllSeats() {
 	    			text : 'Available'
 	    		}
  		}};
-		 
+		 console.log(JSON.stringify(data));
 		 $.ajax({
 			 	url : 'rest/ticket/addAndReserve',
 			    type: "POST",
 			    contentType: "application/json;charset=UTF-8",
-			    async: false,
+			    
 			    data: JSON.stringify(data)
 			})
 			.fail(function(data) {
+				
 			   alert("Something went wrong");
 			})
 		 
@@ -208,7 +220,7 @@ function requestAllSeats() {
 	    		}
     		}
 	    }
-	  //  console.log(JSON.stringify(data));
+	   console.log(JSON.stringify(data));
 	    $.ajax({
 		 	url : 'rest/ticket/addAndBuy',
 		    type: "POST",

@@ -146,6 +146,12 @@ public class TicketManager {
             return Response.noContent().build();
         }
         
+        @POST
+        @Path("/confirmReservation")
+        public Response confirmReservation(){
+        	ticketDao.confirmReservation();
+        	return Response.noContent().build();
+        }
         @GET
         @Path("/test/{ticketId}")
         @Produces("application/json")

@@ -2,7 +2,9 @@ package morghulis.valar.dao;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 
@@ -17,6 +19,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import morghulis.valar.model.Hall;
+import morghulis.valar.model.Movie;
+import morghulis.valar.model.Screening;
 import morghulis.valar.model.Ticket;
 import morghulis.valar.model.User;
 import morghulis.valar.services.UserContext;
@@ -166,6 +171,23 @@ public class TicketDAO {
 			userFromDB.getTickets().remove(ticket);
 		}
 	}
+	
+	public void confirmReservation() {
+		
+		List<Ticket> tickets = null;
+		String textQuery = "select t from Ticket t where t.status =: statusReserved and t.user.id =: userId";
+		TypedQuery<Ticket> query = em.createQuery(textQuery, Ticket.class);
+		query.setParameter("statusReserved", "Reserved");
+		query.setParameter("userId", userContext.getCurrentUser().getId());
+		tickets = query.getResultList();
+		System.out.println(tickets.size());
+		for(Ticket currentTicket : tickets){
+			if (currentTicket.getStatus().equals(SeatStatus.RESERVED)) {
+				currentTicket.setStatus(SeatStatus.TAKEN);
+				editTicket(currentTicket);
+			}
+		}
+	}
 
 	public void createNewTicket(Ticket ticket) {
 		em.persist(ticket);
@@ -182,5 +204,53 @@ public class TicketDAO {
 			return null;
 		}
 	}
-
+	
+	
+	private static Movie[] Movies= {
+    	new Movie("Get Hard"),
+        new Movie("Frozen"),
+        new Movie("Cinderella"),
+        new Movie("The Wedding Ringer"),
+        new Movie("Beauty and the Beast"),
+        new Movie("Tangled")};
+    
+    private static User[] USERS = {
+    	new User("user", "user", "email@email", UserType.CUSTOMER),
+    	new User("user2", "user2", "email2@email", UserType.CUSTOMER),
+    	new User("admin", "admin", "mail@mail", UserType.ADMINISTRATOR)
+    };
+   
+    private static Hall[] Halls = {
+    	new Hall(123), 
+    	new Hall(124),
+    	new Hall(125)
+    };
+    
+    private static Screening[] Screenings = {
+    	new Screening(Halls[0], Movies[0], Calendar.getInstance()),
+    	new Screening(Halls[1], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance()),
+    	new Screening(Halls[2], Movies[1], Calendar.getInstance())
+    };
+    
+    private static Ticket[] Tickets = {
+        new Ticket(Screenings[0], USERS[0], 244, SeatStatus.TAKEN),
+        new Ticket(Screenings[0], USERS[0], 245, SeatStatus.RESERVED),
+        new Ticket(Screenings[0], USERS[0], 246, SeatStatus.TAKEN),
+        new Ticket(Screenings[1], USERS[1], 300, SeatStatus.RESERVED),
+        new Ticket(Screenings[1], USERS[1], 247, SeatStatus.TAKEN),
+        new Ticket(Screenings[1], USERS[1], 248, SeatStatus.TAKEN),
+        new Ticket(Screenings[2], USERS[2], 387, SeatStatus.TAKEN),
+        new Ticket(Screenings[1], USERS[2], 388, SeatStatus.RESERVED),
+        new Ticket(Screenings[2], USERS[2], 316, SeatStatus.TAKEN),
+        new Ticket(Screenings[2], USERS[0], 317,SeatStatus.TAKEN)
+    };    
+    
+	public static void main(String[] args) {
+		System.out.println(Tickets[1]);
+		System.out.println(SeatStatus.RESERVED.toString());
+	}
 }
