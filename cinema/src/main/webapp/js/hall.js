@@ -175,10 +175,18 @@ function requestAllSeats() {
 							 	url : 'rest/ticket/confirmReservation',
 							    type: "POST",
 							    contentType: "application/json;charset=UTF-8",
+							    statusCode: {
+									304 : function(data) {
+										alert("Nothing to confirm.");
+									},
+									200 : function(data){
+										alert("You've successfully cofirmed your pending reservations.");
+									}
+								}
 							})
-							.success(function(data) {
-								alert("You've successfully cofirmed your pending reservations.");
-							})
+							
+								
+						
 							.fail(function(data) {
 							   alert("Something went wrong.");
 
@@ -213,7 +221,7 @@ function requestAllSeats() {
 			 	url : 'rest/ticket/addAndReserve',
 			    type: "POST",
 			    contentType: "application/json;charset=UTF-8",
-			    
+			    async: false,
 			    data: JSON.stringify(data)
 			})
 			.fail(function(data) {

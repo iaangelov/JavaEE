@@ -149,8 +149,11 @@ public class TicketManager {
         @POST
         @Path("/confirmReservation")
         public Response confirmReservation(){
-        	ticketDao.confirmReservation();
-        	return Response.noContent().build();
+        	int confirmReservation = ticketDao.confirmReservation();
+        	if(confirmReservation == -1){
+        		return Response.status(304).build();
+        	}
+        	return Response.status(200).build();
         }
         @GET
         @Path("/test/{ticketId}")
