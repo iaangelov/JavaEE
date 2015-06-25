@@ -32,8 +32,8 @@ function requestAllSeats() {
 				}
 
 				var settings = {
-					rows : 14,
-					cols : 28,
+					rows : 12,
+					cols : 20,
 					rowCssPrefix : 'row-',
 					colCssPrefix : 'col-',
 					seatWidth : 35,
