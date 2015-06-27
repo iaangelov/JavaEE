@@ -9,12 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
+import morghulis.valar.dao.QueryNames;
 
 @Entity
 @XmlRootElement
 @NamedQueries({
-		@NamedQuery(name = "findByName", query = "SELECT u FROM Movie u WHERE u.name = :name"),
-		@NamedQuery(name = "getAllMovies", query = "SELECT u FROM Movie u") })
+		@NamedQuery(name = QueryNames.Movie_FindByName, query = "SELECT u FROM Movie u WHERE u.name = :name"),
+		@NamedQuery(name = QueryNames.Movie_GetAllMovies, query = "SELECT u FROM Movie u") })
 public class Movie implements Serializable {
 
 	private static final long serialVersionUID = -5134102480184071142L;

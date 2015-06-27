@@ -29,6 +29,7 @@ function redirectUnauthorized(){
 
 			},
 			401 : function() {
+				localStorage.setItem("fromUnauthorized", 'true')
 				window.location.replace("index.html")
 			}
 		}
@@ -68,7 +69,7 @@ function getCurrentUserType() {
 function showMessage(ElementID) {
 	$(ElementID).css({
 		'width' : '40%',
-		'margin-top' : '4.5%',
+		'margin-top' : '4%',
 		'text-align' : 'center',
 		'margin-left' : '30%'
 	});

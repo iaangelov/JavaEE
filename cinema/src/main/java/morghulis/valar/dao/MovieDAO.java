@@ -1,52 +1,23 @@
 package morghulis.valar.dao;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ejb.Singleton;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 import morghulis.valar.model.Movie;
 
 @Singleton
-public class MovieDAO {
-
-	@PersistenceContext
-	private EntityManager em;
-
-	public void addMovie(Movie movie) {
-		em.persist(movie);
-	}
-
-	public void deleteMovie(Movie movieToRemove) {
-		if (movieToRemove != null) {
-			em.remove(movieToRemove);
-		}
-	}
-
-	public Movie findById(long key) {
-		return em.find(Movie.class, key);
-	}
+public class MovieDAO extends GenericDAOImpl<Movie> {
 
 	public Movie findByName(String name) {
-		TypedQuery<Movie> query = em
-				.createNamedQuery("findByName", Movie.class)
-				.setParameter(
-						"name", name);
-		return queryMovie(query);
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("name", name);
+		return getSignleResultWithNamedQuery(QueryNames.Movie_FindByName, parameters);
 	}
 
 	public Collection<Movie> getAllMovies() {
-		return em.createNamedQuery("getAllMovies", Movie.class).getResultList();
-	}
-
-	private Movie queryMovie(TypedQuery<Movie> query) {
-		try {
-			return query.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
+		return getListWithNamedQuery(QueryNames.Movie_GetAllMovies);
 	}
 }

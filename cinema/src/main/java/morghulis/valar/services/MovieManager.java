@@ -51,7 +51,7 @@ public class MovieManager {
 	public Response deleteMovie(@QueryParam("movieId") String movieId) {
 		Movie movieToRemove = movieDAO.findById(Long.parseLong(movieId));
 		if (movieToRemove != null) {
-			movieDAO.deleteMovie(movieToRemove);
+			movieDAO.remove(movieToRemove);
 		}
 		return Response.noContent().build();
 	}
@@ -62,7 +62,7 @@ public class MovieManager {
 	//@Consumes(MediaType.APPLICATION_JSON)
 	public void addMovie(Movie newMovie) {
 		if (newMovie != null) {
-			movieDAO.addMovie(newMovie);
+			movieDAO.add(newMovie);
 		}
 	}
 }

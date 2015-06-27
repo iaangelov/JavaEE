@@ -1,42 +1,38 @@
 package morghulis.valar.dao;
 
 import java.security.MessageDigest;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 import morghulis.valar.model.User;
 import morghulis.valar.services.UserContext;
 import morghulis.valar.utils.UserType;
 
 @Singleton
-public class UserDAO {
-
-	@PersistenceContext
-	private EntityManager entityManager;
+public class UserDAO extends GenericDAOImpl<User> {
 
 	@Inject
 	private UserContext userContext;
 
-	public List<User> getAllUsers() {
-		String textQuery;
+	private Map<String, String> parameters = new HashMap<>();
+
+	public Collection<User> getAllUsers() {
 		if (userContext.getCurrentUser().getUserType() == UserType.ADMINISTRATOR) {
-			textQuery = "SELECT u FROM User u";
-		} else {
-			textQuery = "SELECT u FROM User u WHERE u.userType = 'Customer'";
+			return getListWithNamedQuery(QueryNames.User_GetAllAsAdmin);
 		}
 
-		return entityManager.createQuery(textQuery, User.class).getResultList();
+		return getListWithNamedQuery(QueryNames.User_GetAllAsUser);
 	}
 
-	public void addUser(User user) {
+	@Override
+	public void add(User user) {
 		if (findByUsername(user.getUsername()) == null) {
 			user.setPassword(getHashedPassword(user.getPassword()));
-			entityManager.persist(user);
+			em.persist(user);
 		}
 	}
 
@@ -45,36 +41,22 @@ public class UserDAO {
 	}
 
 	public boolean validateCredentials(String username, String password) {
-		String checkQuery = "SELECT u FROM User u WHERE u.username=:username AND u.password=:password";
-		TypedQuery<User> query = entityManager.createQuery(checkQuery,
-				User.class);
-		query.setParameter("username", username);
-		query.setParameter("password", getHashedPassword(password));
-		return makeQuery(query) != null;
+		parameters.clear();
+		parameters.put("username", username);
+		parameters.put("password", getHashedPassword(password));
+		return getListWithNamedQuery(QueryNames.User_ValidateCredentials,
+				parameters).size() != 0;
 	}
 
 	public User findByUsername(String username) {
-		String checkQuery = "SELECT u FROM User u WHERE u.username=:username";
-		TypedQuery<User> query = entityManager.createQuery(checkQuery,
-				User.class);
-		query.setParameter("username", username);
-		return makeQuery(query);
-	}
-	
-	public User findById(Long id){
-		return entityManager.find(User.class, id);
-	}
-	
-	public void removeUserById(Long id){
-		entityManager.remove(findById(id));
+		parameters.clear();
+		parameters.put("username", username);
+		return getSignleResultWithNamedQuery(QueryNames.User_FindByUsername,
+				parameters);
 	}
 
-	private User makeQuery(TypedQuery<User> query) {
-		try {
-			return query.getSingleResult();
-		} catch (Exception e) {
-			return null;
-		}
+	public void removeUserById(Long id) {
+		remove(findById(id));
 	}
 
 	private String getHashedPassword(String password) {

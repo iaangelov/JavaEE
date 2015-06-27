@@ -1,8 +1,6 @@
 package morghulis.valar.model;
 
 import java.io.Serializable;
-import java.security.AllPermission;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -20,12 +18,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import morghulis.valar.dao.QueryNames;
+
 @Entity
 @XmlRootElement
 @NamedQueries({
-	@NamedQuery(name = "allScreenings", query = "SELECT s FROM Screening s"),
-	@NamedQuery(name = "allScreeningsByHallId", query = "SELECT s FROM Screening s WHERE s.hall.id = :id"),
-	@NamedQuery(name = "allScreeningsByMovieName", query = "SELECT s FROM Screening s WHERE s.movie.name = :name")
+	@NamedQuery(name = QueryNames.Screening_GetAllScreenings, query = "SELECT s FROM Screening s"),
+	@NamedQuery(name = QueryNames.Screening_GetAllScreeningsByHallID, query = "SELECT s FROM Screening s WHERE s.hall.id = :id"),
+	@NamedQuery(name = QueryNames.Screening_GetAllScreeningsByScreeningID, query = "SELECT s FROM Screening s WHERE s.id = :id"),
+	@NamedQuery(name = QueryNames.Screening_GetAllScreeningsByMovieName, query = "SELECT s FROM Screening s WHERE s.movie.name = :name")
 })
 public class Screening implements Serializable {
 

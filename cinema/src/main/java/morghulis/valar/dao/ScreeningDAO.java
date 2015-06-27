@@ -1,50 +1,33 @@
 package morghulis.valar.dao;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ejb.Singleton;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import morghulis.valar.model.Screening;
 
 @Singleton
-public class ScreeningDAO {
+public class ScreeningDAO extends GenericDAOImpl<Screening> {
 
-	@PersistenceContext
-	private EntityManager em;
-	
-	public void add(Screening screening) {
-	
-		em.persist(screening);
+	private Map<String, Object> parameters = new HashMap<>();
+
+	public Collection<Screening> getAllScreenings() {
+		return getListWithNamedQuery(QueryNames.Screening_GetAllScreenings);
 	}
-	
-	public void remove(Screening screeningToRemove) {
-		
-		em.remove(screeningToRemove);
+
+	public Collection<Screening> getAllScreeningsByHallId(Long hallId) {
+		parameters.clear();
+		parameters.put("id", hallId);
+		return getListWithNamedQuery(
+				QueryNames.Screening_GetAllScreeningsByHallID, parameters);
 	}
-	
-	public List<Screening> getAllScreenings() {
-		
-		return em.createNamedQuery("allScreenings", Screening.class).getResultList();
-	}
-	
-	public List<Screening> getAllScreeningsByHallId(Long hallId) {
-		
-		return em.createNamedQuery("allScreeningsByHallId", Screening.class).
-				setParameter("id", hallId).getResultList();
-	}
-	
-	public Screening findScreeningById(Long id) {
-		
-		return em.createQuery("SELECT s FROM Screening s WHERE s.id = :id", Screening.class).
-				setParameter("id", id).getSingleResult();
-	}
-	
-	public List<Screening> getAllScreeningsByMovieName(String name) {
-		
-		return em.createNamedQuery("allScreeningsByMovieName", Screening.class)
-				.setParameter("name", name)
-				.getResultList();
+
+	public Collection<Screening> getAllScreeningsByMovieName(String name) {
+		parameters.clear();
+		parameters.put("name", name);
+		return getListWithNamedQuery(
+				QueryNames.Screening_GetAllScreeningsByMovieName, parameters);
 	}
 }

@@ -21,6 +21,7 @@
 <script type="text/javascript" charset="utf-8"
 	src="js/jquery.leanModal.min.js"></script>
 <script type="text/javascript" src="js/adminPanel.js"></script>
+<script type="text/javascript" src="js/jquery.scrollTableBody-1.0.0.js"></script>
 
 <script>
 	$(function() {
@@ -29,8 +30,11 @@
 </script>
 
 <script type="text/javascript">
-	$(document).ready(getMovies());
-	$(document).ready(getUsers());
+	$(document).ready(function() {
+		getMovies();
+		getUsers()
+		$('table').scrollTableBody({rowsToDisplay:9});
+	});
 </script>
 
 <script type="text/javascript" src="js/index.js"></script>
@@ -47,7 +51,7 @@
 			<li><a href="#ticketsTab">Tickets</a></li>
 		</ul>
 		<div id="moviesTab">
-			<div style="height: 420px; overflow: auto;">
+			<div style="height: 98%; overflow: auto; padding: 0">
 				<table id="movies_table" class="table">
 					<tr>
 						<th>Name</th>
@@ -79,15 +83,15 @@
 
 
 		<div id="ticketsTab">
-		
-		<form id="search_user_form" class="form-user-search" role="form"
+
+			<form id="search_user_form" class="form-user-search" role="form"
 				method="get">
-				<input type="text" class="form-control" name="userId"
-					id="userId" placeholder="User Id" required autofocus>
+				<input type="text" class="form-control" name="userId" id="userId"
+					placeholder="User Id" required autofocus>
 				<button id="btnFindTickets" class="btn btn-lg btn-primary btn-block"
 					type="button" onclick="findTickets()">Find Tickets</button>
-			</form>	
-		
+			</form>
+
 			<div style="height: 420px; overflow: auto;">
 				<table id="tickets_table" class="table">
 					<tr>

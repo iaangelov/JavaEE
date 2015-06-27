@@ -37,7 +37,7 @@ public class ScreeningManager {
 	@Produces("application/json")
 	public Screening getScreeningById(@PathParam("screeningId") String screeningId) {
 		
-		return screeningDAO.findScreeningById(Long.parseLong(screeningId));
+		return screeningDAO.findById(Long.parseLong(screeningId));
 	}
 	
 	@GET
@@ -60,7 +60,7 @@ public class ScreeningManager {
 	@Path("remove")
 	@Consumes(MediaType.TEXT_PLAIN)
 	public Response deleteScreening(@QueryParam("id") String id) {
-		Screening screening = screeningDAO.findScreeningById(Long.parseLong(id));
+		Screening screening = screeningDAO.findById(Long.parseLong(id));
 		if(screening != null) {
 			screeningDAO.remove(screening);
 		}

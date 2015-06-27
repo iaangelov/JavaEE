@@ -39,7 +39,7 @@ public class TicketManager {
         @GET
         @Path("all")
         @Produces("application/json")
-        public List<Ticket> getAllTickets() {
+        public Collection<Ticket> getAllTickets() {
             return ticketDao.getAllTickets();
         }
         
@@ -47,7 +47,7 @@ public class TicketManager {
     	@Path("add")
     	public void addTicket(Ticket newTicket) {
     		if (newTicket != null) {
-    			ticketDao.addTicket(newTicket);
+    			ticketDao.add(newTicket);
     		}
     	}
         
@@ -55,8 +55,8 @@ public class TicketManager {
     	@Path("addAndBuy")
     	public Response addAndBuy(Ticket newTicket) {
     		if (newTicket != null) {
-    			newTicket.setScreening(screeningDao.findScreeningById(newTicket.getScreening().getId()));
-    			ticketDao.addTicket(newTicket);
+    			newTicket.setScreening(screeningDao.findById(newTicket.getScreening().getId()));
+    			ticketDao.add(newTicket);
     		//	System.out.println("coning from post " + UserContext.getCurrentUser() == null);
     			ticketDao.buyTicket(newTicket, UserContext.getCurrentUser());
     			return Response.ok().build();
@@ -69,8 +69,8 @@ public class TicketManager {
     	@Path("addAndReserve")
     	public Response addAndReserve(Ticket newTicket) {
     		if (newTicket != null) {
-    			newTicket.setScreening(screeningDao.findScreeningById(newTicket.getScreening().getId()));
-    			ticketDao.addTicket(newTicket);
+    			newTicket.setScreening(screeningDao.findById(newTicket.getScreening().getId()));
+    			ticketDao.add(newTicket);
     		//	System.out.println("coning from post " + UserContext.getCurrentUser() == null);
     			ticketDao.reserveTicket(newTicket, UserContext.getCurrentUser());
     			return Response.ok().build();
@@ -173,7 +173,7 @@ public class TicketManager {
         
                // findById = ticketDao.findById(id);
         	//return findById;
-                return ticketDao.getAllTickets().get(0);
+                return (Ticket) ticketDao.getAllTickets().toArray()[0];
         }
        
 }
