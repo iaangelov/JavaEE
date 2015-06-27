@@ -66,7 +66,7 @@ public class UserManager {
 			return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
 		}
 		newUser.setUserStatus(UserType.CUSTOMER);
-		userDAO.addUser(newUser);
+		userDAO.add(newUser);
 		userContext.setCurrentUser(newUser);
 		return RESPONSE_OK;
 	}
