@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,6 +17,9 @@ import morghulis.valar.utils.UserType;
 
 @Entity
 @XmlRootElement
+@NamedQueries({
+	@NamedQuery(name = "getAllAdmin", query = "SELECT u FROM User u"),
+	@NamedQuery(name = "getAllUser", query = "SELECT u FROM User u WHERE u.userType = 'Customer'") })
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 8789553103516459097L;

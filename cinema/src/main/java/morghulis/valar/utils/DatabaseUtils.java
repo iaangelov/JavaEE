@@ -116,7 +116,7 @@ public class DatabaseUtils {
     
     private void addTestUsers(){
     	for(User user : USERS){
-    		userDAO.addUser(user);
+    		userDAO.add(user);
     	}
     }
     
