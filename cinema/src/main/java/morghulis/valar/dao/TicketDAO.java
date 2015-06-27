@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
@@ -44,7 +45,7 @@ public class TicketDAO {
 	@Resource
     TimerService timerService;
 
-	private Queue<Ticket> reserved = new ArrayDeque<Ticket>();
+	private Queue<Ticket> reserved = new ConcurrentLinkedDeque<Ticket>();
 	
 	public List<Ticket> getAllTickets() {
 		String query = "SELECT t FROM Ticket t";
