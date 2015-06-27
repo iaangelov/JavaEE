@@ -123,12 +123,14 @@ td {
 .space {
 	margin-left: 46%;
 	margin-top: 40%;
- 	width: 48%;
+ 	width: 28%;
 }
 
 .legend {
-	width:35%;
+	width:15%;
 	margin-left: 10%;
+	position: absolute;
+/* 	border: 1px solid #A4A4A4; */
 }
 
 #place {
