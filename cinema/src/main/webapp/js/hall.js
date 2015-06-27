@@ -36,13 +36,18 @@ function requestAllSeats() {
 					cols : 20,
 					rowCssPrefix : 'row-',
 					colCssPrefix : 'col-',
-					seatWidth : 35,
-					seatHeight : 35,
+					seatWidth : ($($('#place').parent()[0]).width()-$($('#place').parent()[0]).width()/20) / 20,
+					seatHeight :  ($($('#place').parent()[0]).height()-$($('#place').parent()[0]).height()/12) / 12,
 					seatCss : 'seat',
 					selectedSeatCss : 'selectedSeat',
 					selectingSeatCss : 'selectingSeat'
 				};
 
+				console.log("currenly-here");
+				console.log($($('#place').parent()[0]).width());
+				console.log($($('#place').parent()[0]).height());
+				console.log("currenly-here");
+				
 				var init = function(reservedSeat) {
 					var str = [], seatNo, className,k = 1;
 					for (i = 0; i < settings.rows; i++) {
@@ -51,14 +56,7 @@ function requestAllSeats() {
 								continue;
 							}
 							if (i == settings.rows / 2) {
-//								'<li style="top:'
-//								+ (i * settings.seatHeight).toString()
-//								+ 'px;left:'
-//								+ (j * settings.seatWidth).toString()
-//								+ 'px">' + '">'
-//								+ 'hello'
-//								+ '</li>'
-//								k++;
+
 								continue;
 							}
 							seatNo = (i + j * settings.rows + 1);
@@ -114,6 +112,7 @@ function requestAllSeats() {
 //							});
 //						})
 						
+				
 				$('#btnBuyTickets').click(
 							            	    
 						function() {
@@ -130,10 +129,10 @@ function requestAllSeats() {
 								), function(index, value) {
 								$(this).toggleClass(settings.selectingSeatCss);
 								$(this).toggleClass(settings.selectedSeatCss);
-								console.log(this);
+								//console.log(this);
 							});
-							console.log(str);
-							console.log(bookedSeatsIds);
+							//console.log(str);
+							//console.log(bookedSeatsIds);
 							if(undefined != item){
 								alert("Buy tickets successful!");
 							}
@@ -185,6 +184,8 @@ function requestAllSeats() {
 								}
 							})
 							
+								
+						
 							.fail(function(data) {
 							   alert("Something went wrong.");
 
@@ -194,7 +195,45 @@ function requestAllSeats() {
 
 				$('#btnCancel').click(
 						function() {
-						alert("no functionality added yet");
+							$.ajax({
+							 	url : 'rest/ticket/cancelMyReservations',
+							    type: "DELETE",
+							    contentType: "application/json;charset=UTF-8",
+							    statusCode: {
+									304 : function(data) {
+										alert("Nothing to cancel.");
+									},
+									200 : function(data){
+																		
+											var tempo = [];
+											for(var i = 0; i < data.ticket.length; i++){
+												tempo.push(data.ticket[i].seatNumber);
+											}
+														
+										$.each($('#place li.' + settings.selectedSeatCss
+												+ ' a'), function(index, value) {
+											item = $(this).attr('title');
+											console.log(tempo);
+											console.log(item);
+											console.log(tempo.indexOf(item));
+											var that = this;
+											for(var i = 0; i < tempo.length; i ++){
+												if(tempo[i] == item){
+													console.log("heyyoyoyo");
+													$($(that).parent()[0]).toggleClass(settings.selectedSeatCss);
+												}
+											}	
+											
+										});
+										if(tempo.length === 0){
+											alert("You have no pending reservations. Nothing to cancel.")
+										}
+										else {
+										alert("You've successfully canceled all your pending reservations.");
+										}
+									}
+								}
+							})
 					});
 			}
 		}

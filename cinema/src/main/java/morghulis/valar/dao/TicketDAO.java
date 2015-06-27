@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
@@ -44,7 +45,7 @@ public class TicketDAO {
 	@Resource
     TimerService timerService;
 
-	private Queue<Ticket> reserved = new ArrayDeque<Ticket>();
+	private Queue<Ticket> reserved = new ConcurrentLinkedDeque<Ticket>();
 	
 	public List<Ticket> getAllTickets() {
 		String query = "SELECT t FROM Ticket t";
@@ -159,7 +160,9 @@ public class TicketDAO {
 	public void timeout(Timer timer) {
 		timer.cancel();
 		Ticket returned = reserved.poll();
-		cancelReservation(returned.getId());
+		if(findById(returned.getId()) != null ){
+			cancelReservation(returned.getId());
+		}
 	}
 
 	public void cancelReservation(long ticketId) {
@@ -172,6 +175,18 @@ public class TicketDAO {
 		}
 	}
 	
+	public Collection<Ticket> cancelMyReservations(){
+		List<Ticket> tickets = null;
+		String textQuery = "select t from Ticket t where t.status =: statusReserved and t.user.id =: userId";
+		TypedQuery<Ticket> query = em.createQuery(textQuery, Ticket.class);
+		query.setParameter("statusReserved", "Reserved");
+		query.setParameter("userId", userContext.getCurrentUser().getId());
+		tickets = query.getResultList();
+		for(Ticket currentTicket : tickets){
+			deleteTicket(currentTicket.getId());
+		}
+		return tickets;
+	}
 	public int confirmReservation() {
 		
 		List<Ticket> tickets = null;
