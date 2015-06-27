@@ -155,6 +155,17 @@ public class TicketManager {
         	}
         	return Response.status(200).build();
         }
+        
+        @POST
+        @Path("/cancelReservation")
+        public Response cancelReservation(){
+        	int confirmReservation = ticketDao.confirmReservation();
+        	if(confirmReservation == -1){
+        		return Response.status(304).build();
+        	}
+        	return Response.status(200).build();
+        }
+        
         @GET
         @Path("/test/{ticketId}")
         @Produces("application/json")

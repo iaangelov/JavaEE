@@ -114,13 +114,21 @@ td {
 /* 	background: rgba(64, 64, 64, 0.9); */
 }
 
-#space {
+.space,.legend
+{
+/* 	float : left; */
+/* 	margin-bottom: 1em; */
+/* 	margin-left: 3%; */
+}
+.space {
 	margin-left: 46%;
-	margin-top: 37%
+	margin-top: 40%;
+ 	width: 48%;
 }
 
-#legend {
-	
+.legend {
+	width:35%;
+	margin-left: 10%;
 }
 
 #place {

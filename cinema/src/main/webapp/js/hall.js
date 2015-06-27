@@ -185,8 +185,6 @@ function requestAllSeats() {
 								}
 							})
 							
-								
-						
 							.fail(function(data) {
 							   alert("Something went wrong.");
 
