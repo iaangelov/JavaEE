@@ -90,8 +90,8 @@ td {
 }
 /* seats */
 #holder {
-	height: 70%;
-	width: 70%;
+	height: 400px;
+	width: 800px;
 	position: absolute;
 	
 	text-align: center;
