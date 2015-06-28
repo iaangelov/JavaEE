@@ -30,9 +30,9 @@ public class DatabaseUtils {
         new Movie("Tangled")};
     
     private static User[] USERS = {
-    	new User("user", "user", "email@email", UserType.CUSTOMER),
-    	new User("user2", "user2", "email2@email", UserType.CUSTOMER),
-    	new User("admin", "admin", "mail@mail", UserType.ADMINISTRATOR)
+    	new User("user", "user", "email@email", "Pencho", "Penchev", UserType.CUSTOMER),
+    	new User("user2", "user2", "email2@email", "Ime", "Familia", UserType.CUSTOMER),
+    	new User("admin", "admin", "mail@mail", "Ime", "Familia2", UserType.ADMINISTRATOR)
     };
    
     private static Hall[] Halls = {

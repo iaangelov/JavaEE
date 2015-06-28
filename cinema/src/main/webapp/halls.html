@@ -18,18 +18,22 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="styles/loginStyle.css">
-<link rel="stylesheet" type="text/css" href="styles/hall.css">	 
+<link rel="stylesheet" type="text/css" href="styles/hall.css">
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript" src="js/hall.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="js/jquery.leanModal.min.js"></script>
-	
-	<script type="text/javascript">console.log(localStorage["currentHall"])</script>
-	<script type="text/javascript">console.log(localStorage["currentScreening"])</script>
+
+<script type="text/javascript">
+	console.log(localStorage["currentHall"])
+</script>
+<script type="text/javascript">
+	console.log(localStorage["currentScreening"])
+</script>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -81,9 +85,13 @@
 						<input type="password" name="pwdRegister" id="pwdRegister"
 							class="txtfield" tabindex="2"> <label for="password">Confirm
 							Password:</label> <input type="password" name="conf_pwdRegister"
-							id="conf_pwdRegister" class="txtfield" tabindex="2"> <label
+							id="conf_pwdRegister" class="txtfield" tabindex="3"> <label
 							for="email">Email:</label> <input type="text" name="email"
-							id="email" class="txtfield" tabindex="1">
+							id="email" class="txtfield" tabindex="4"> <label
+							for="first_name">First name:</label> <input type="text"
+							name="first_name" id="first_name" class="txtfield" tabindex="5">
+						<label for="surname">Surname:</label> <input type="text"
+							name="last_name" id="surname" class="txtfield" tabindex="6">
 
 						<div class="center">
 							<input type="submit" name="registerbtn" id="registerbtn"
@@ -113,6 +121,7 @@
 				</script>
 				<ul id="navelems" style="float: right; display: none;"
 					class="nav navbar-nav navigation">
+					<li><a href="index.html">Home</a></li>
 					<li><a href="profile.html">My profile</a></li>
 					<li><a onclick="logout()" href="#"> Logout </a></li>
 				</ul>
@@ -121,36 +130,42 @@
 		</div>
 		<!-- /.container -->
 	</nav>
-	
-<!-- 	<div id="all"> -->
-	
-    <div id="holder"> 
-   
-        <ul  id="place">
-        </ul>    
-    </div>
-    
-    <div class="legend" style="float:left;"> 
-    <ul id="seatDescription">
-        <li class="white" style="background:url('images/available_seat_img.gif') no-repeat scroll 0 0 transparent;">Available Seat</li>
-        <li class="white" style="background:url('images/booked_seat_img.gif') no-repeat scroll 0 0 transparent;">Booked Seat</li>
-        <li class="white" style="background:url('images/selected_seat_img.gif') no-repeat scroll 0 0 transparent;">Selected Seat</li>
-        <li>  </li>
-        <li>  </li>
-    </ul>
-    </div>
-    
-    <div class="space">
-    	<button id="btnBuyTickets" class="btn btn-lg btn-primary btn-sm"
-				type="button">Book Seats</button>     
-        <button id="btnAddReservations" class="btn btn-lg btn-primary btn-sm"
-				type="button" >Make Reservation</button>
+
+	<!-- 	<div id="all"> -->
+
+	<div id="holder">
+
+		<ul id="place">
+		</ul>
+	</div>
+
+	<div class="legend" style="float: left;">
+		<ul id="seatDescription">
+			<li class="white"
+				style="background: url('images/available_seat_img.gif') no-repeat scroll 0 0 transparent;">Available
+				Seat</li>
+			<li class="white"
+				style="background: url('images/booked_seat_img.gif') no-repeat scroll 0 0 transparent;">Booked
+				Seat</li>
+			<li class="white"
+				style="background: url('images/selected_seat_img.gif') no-repeat scroll 0 0 transparent;">Selected
+				Seat</li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+
+	<div class="space">
+		<button id="btnBuyTickets" class="btn btn-lg btn-primary btn-sm"
+			type="button">Book Seats</button>
+		<button id="btnAddReservations" class="btn btn-lg btn-primary btn-sm"
+			type="button">Make Reservation</button>
 		<button id="btnConfirm" class="btn btn-lg btn-primary btn-sm"
-				type="button">Confirm Reservation</button>     
+			type="button">Confirm Reservation</button>
 		<button id="btnCancel" class="btn btn-lg btn-primary btn-sm"
-				type="button">Cancel reservation</button>     
-     </div>
-		
-<!-- </div> -->
+			type="button">Cancel reservation</button>
+	</div>
+
+	<!-- </div> -->
 </body>
 </html>

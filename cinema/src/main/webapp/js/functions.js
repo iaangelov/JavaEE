@@ -40,7 +40,7 @@ function redirectUnauthorized(){
 // get user for welcoming message
 function getUserName() {
 	$.ajax({
-		url : 'rest/user/current',
+		url : 'rest/user/names',
 		type : "GET",
 		dataType : "text"
 	}).always(function(data) {
@@ -53,7 +53,7 @@ function getUserName() {
 
 function getCurrentUserType() {
 	var type = "";
-	$.ajax({
+	$.ajax({	
 		url : 'rest/user/type',
 		type : "GET",
 		async : false,
@@ -85,6 +85,8 @@ function indexInit() {
 function register() {
 	var username = $("#usernameRegister")[0].value;
 	var password = $("#pwdRegister")[0].value;
+	var first_name = $("#first_name")[0].value;
+	var surname = $("#surname")[0].value;
 	var email = $("#email")[0].value;
 
 	if (!isPasswordValid(password)) {
@@ -95,6 +97,8 @@ function register() {
 		user : {
 			username : username,
 			password : password,
+			first_name : first_name,
+			surname : surname,
 			email : email
 		}
 	}

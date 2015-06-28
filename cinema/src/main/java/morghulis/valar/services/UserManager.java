@@ -41,6 +41,17 @@ public class UserManager {
 	}
 	
 	@GET
+	@Path("names")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getCurrrentUserNames(){
+		User current = userContext.getCurrentUser();
+		if(current == null){
+			return null;
+		}
+		return current.getFirst_name() + " " + current.getSurname();
+	}
+	
+	@GET
 	@Path("authorized")
 	public Response isAuthorized(){
 		if(userContext.getCurrentUser() == null){
