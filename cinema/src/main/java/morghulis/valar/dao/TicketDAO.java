@@ -185,4 +185,25 @@ public class TicketDAO extends GenericDAOImpl<Ticket> {
 	public void editTicket(Ticket ticket) {
 		em.merge(ticket);
 	}
+
+	public Collection<Ticket> findTicketsByNames(String names) {
+		//no check if given only 1 name
+		String[] theNames = names.split(" ");
+		String fname;
+		String lname;
+		
+		if(theNames.length == 1){
+			fname = theNames[0];
+			lname = "";
+		}else{
+			fname = theNames[0];
+			lname = theNames[1];
+		}
+		
+		parameters.clear();
+		parameters.put("fname", fname);
+		parameters.put("lname", lname);
+		
+		return getListWithNamedQuery(QueryNames.Ticket_FindByUserNames, parameters);
+	}
 }

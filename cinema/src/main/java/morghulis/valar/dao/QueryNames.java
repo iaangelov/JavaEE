@@ -16,6 +16,7 @@ public final class QueryNames {
 	public static final String Ticket_FindByUserID = "findByUserId";
 	public static final String Ticket_FindByScreeningID = "findByScreeningId";
 	public static final String Ticket_FindReservedByUserID = "findReservedByUserId";
+	public static final String Ticket_FindByUserNames = "findByUserName";
 	
 	private QueryNames(){}
 }

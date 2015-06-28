@@ -121,14 +121,18 @@
 						<input type="password" name="pwdRegister" id="pwdRegister"
 							class="txtfield" tabindex="2"> <label for="password">Confirm
 							Password:</label> <input type="password" name="conf_pwdRegister"
-							id="conf_pwdRegister" class="txtfield" tabindex="2"> <label
+							id="conf_pwdRegister" class="txtfield" tabindex="3"> <label
 							for="email">Email:</label> <input type="text" name="email"
-							id="email" class="txtfield" tabindex="1">
+							id="email" class="txtfield" tabindex="4"> <label
+							for="first_name">First name:</label> <input type="text"
+							name="first_name" id="first_name" class="txtfield" tabindex="5">
+						<label for="surname">Surname:</label> <input type="text"
+							name="last_name" id="surname" class="txtfield" tabindex="6">
 
 						<div class="center">
 							<input type="submit" name="registerbtn" id="registerbtn"
 								class="flatbtn-blu hidemodal" value="Regsiter"
-								style="margin-left: 21%;" tabindex="3">
+								style="margin-left: 34%;" tabindex="3">
 						</div>
 					</form>
 				</div>
@@ -153,6 +157,7 @@
 				</script>
 				<ul id="navelems" style="float: right; display: none;"
 					class="nav navbar-nav navigation">
+					<li><a href="index.html">Home</a></li>
 					<li><a href="profile.html">My profile</a></li>
 					<li><a onclick="logout()" href="#"> Logout </a></li>
 				</ul>
@@ -198,7 +203,7 @@
 		<div id="unauthorizedAccess" class="alert alert-danger fade in"
 			style="display: none">
 			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Error!</strong>
-			You must be logged in to use this feature! 
+			You must be logged in to use this feature!
 		</div>
 	</div>
 </body>

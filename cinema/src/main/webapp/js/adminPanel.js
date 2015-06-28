@@ -121,9 +121,9 @@ function addMovie() {
     }
 
 function findTickets() {
-	var id = $("#userId")[0].value;
+	var names = $("#names")[0].value;
 	$.ajax({
-        url: 'rest/ticket/byUserId/' + id,
+        url: 'rest/ticket/byUserNames/' + names,
         type: "GET",
         dataType: "json",
         success : function (data) {

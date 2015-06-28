@@ -72,26 +72,31 @@
 					</form>
 				</div>
 
-				<div id="registermodal" style="display: none;">
-					<h1 style="text-align: center; font-size: 30px">Register</h1>
-					<form id="registerform" name="registerform" method="post">
-						<label for="username">Username:</label> <input type="text"
-							name="usernameRegister" id="usernameRegister" class="txtfield"
-							tabindex="1" autofocus> <label for="password">Password:</label>
-						<input type="password" name="pwdRegister" id="pwdRegister"
-							class="txtfield" tabindex="2"> <label for="password">Confirm
-							Password:</label> <input type="password" name="conf_pwdRegister"
-							id="conf_pwdRegister" class="txtfield" tabindex="2"> <label
-							for="email">Email:</label> <input type="text" name="email"
-							id="email" class="txtfield" tabindex="1">
-
-						<div class="center">
-							<input type="submit" name="registerbtn" id="registerbtn"
-								class="flatbtn-blu hidemodal" value="Regsiter"
-								style="margin-left: 21%;" tabindex="3">
-						</div>
-					</form>
-				</div>
+			<div id="registermodal" style="display: none;">
+                                        <h1 style="text-align: center; font-size: 30px">Register</h1>
+                                        <form id="registerform" name="registerform" method="post">
+                                                <label for="username">Username:</label> <input type="text"
+                                                        name="usernameRegister" id="usernameRegister" class="txtfield"
+                                                        tabindex="1" autofocus> <label for="password">Password:</label>
+                                                <input type="password" name="pwdRegister" id="pwdRegister"
+                                                        class="txtfield" tabindex="2"> <label for="password">Confirm
+                                                        Password:</label> <input type="password" name="conf_pwdRegister"
+                                                        id="conf_pwdRegister" class="txtfield" tabindex="3"> <label
+                                                        for="email">Email:</label> <input type="text" name="email"
+                                                        id="email" class="txtfield" tabindex="4"> <label
+                                                        for="first_name">First name:</label> <input type="text"
+                                                        name="first_name" id="first_name" class="txtfield" tabindex="5">
+                                                <label for="surname">Last name:</label> <input type="text"
+                                                        name="last_name" id="surname" class="txtfield" tabindex="6">
+                                                       
+                                                <div class="center">
+                                                        <input type="submit" name="registerbtn" id="registerbtn"
+                                                                class="flatbtn-blu hidemodal" value="Regsiter"
+                                                                style="margin-left: 34%;" tabindex="7">
+                                                </div>
+                                        </form>
+ 
+                                </div>
 
 				<script type="text/javascript">
 					$(function() {

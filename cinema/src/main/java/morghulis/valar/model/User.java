@@ -36,6 +36,10 @@ public class User implements Serializable {
 	private String password;
 
 	private String email;
+	
+	private String first_name;
+	
+	private String surname;
 
 	@OneToMany(mappedBy = "user")
 	private List<Ticket> tickets = new ArrayList<Ticket>(50);
@@ -43,17 +47,16 @@ public class User implements Serializable {
 	private String userType;
 
 	public User() {
-		this.username = "";
-		this.password = "";
-		this.email = "";
-		this.userType = UserType.CUSTOMER.getText();
+		this("", "", "", "", "", UserType.CUSTOMER);
 	}
 
-	public User(String username, String password, String email,
+	public User(String username, String password, String email,String first_name, String surname, 
 			UserType userType) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.first_name = first_name;
+		this.surname = surname;
 		this.userType = userType.getText();
 	}
 
@@ -87,6 +90,22 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public List<Ticket> getTickets() {

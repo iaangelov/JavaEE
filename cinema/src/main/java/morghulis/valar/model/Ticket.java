@@ -21,6 +21,7 @@ import morghulis.valar.utils.SeatStatus;
 		@NamedQuery(name = QueryNames.Ticket_GetAllTickets, query = "SELECT t FROM Ticket t"),
 		@NamedQuery(name = QueryNames.Ticket_FindByUserID, query = "SELECT t FROM Ticket t WHERE t.user.id = :userId"),
 		@NamedQuery(name = QueryNames.Ticket_FindReservedByUserID, query = "SELECT t FROM Ticket t WHERE t.status = :statusReserved AND t.user.id = :userId"),
+		@NamedQuery(name = QueryNames.Ticket_FindByUserNames, query = "SELECT t FROM Ticket t WHERE t.user.first_name = :fname AND t.user.surname = :lname"),
 		@NamedQuery(name = QueryNames.Ticket_FindByScreeningID, query = "SELECT t FROM Ticket t WHERE t.screening.id = :screeningId") })
 public class Ticket implements Serializable {
 
