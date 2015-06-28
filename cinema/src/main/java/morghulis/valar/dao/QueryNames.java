@@ -17,6 +17,7 @@ public final class QueryNames {
 	public static final String Ticket_FindByScreeningID = "findByScreeningId";
 	public static final String Ticket_FindReservedByUserID = "findReservedByUserId";
 	public static final String Ticket_FindByUserNames = "findByUserName";
-	
+	public static final String Reservation_GetAllReservations = "getAllReservations";
+	public static final String Reservation_FindReservationsByUserId = "findReservByUserId";
 	private QueryNames(){}
 }

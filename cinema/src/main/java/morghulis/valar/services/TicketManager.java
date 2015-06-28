@@ -99,13 +99,14 @@ public class TicketManager {
 	@Path("/byUserId/{userId}")
 	@Produces("application/json")
 	public Collection<Ticket> getTicketsByUserId(@PathParam("userId") Long id) {
+		Collection<Ticket> findTicketsByUserId = null;
 		try {
-			Collection<Ticket> findTicketsByUserId = ticketDao
+			findTicketsByUserId = ticketDao
 					.findTicketsByUserId();
 		} catch (NullPointerException ex) {
 			// throw new NullPointerException();
 		}
-		return new ArrayList<Ticket>();
+		return findTicketsByUserId.size() > 0 ? findTicketsByUserId : new ArrayList<Ticket>();
 	}
 
 	@GET

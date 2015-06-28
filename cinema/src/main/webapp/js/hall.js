@@ -144,10 +144,11 @@ function requestAllSeats() {
 				$('#btnAddReservations').click(
 	            	    
 						function() {
-							var item;
+							var item, str = [];
 							$.each($('#place li.' + settings.selectingSeatCss
 									+ ' a'), function(index, value) {
 								item = $(this).attr('title');
+								str.push(item);
 								reserveTicket(item);
 							});
 							
@@ -253,6 +254,7 @@ function requestAllSeats() {
 	    			text : 'Available'
 	    		}
  		}};
+		 console.log("braa");
 		 console.log(JSON.stringify(data));
 		 $.ajax({
 			 	url : 'rest/ticket/addAndReserve',

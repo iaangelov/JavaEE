@@ -31,6 +31,9 @@ public class Ticket implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@ManyToOne
+	private Reservation reservation;
+	
 	@ManyToOne(cascade = CascadeType.DETACH)
 	private Screening screening;
 
@@ -60,6 +63,14 @@ public class Ticket implements Serializable {
 		this.id = id;
 	}
 
+	public Reservation getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
+	}
+	
 	public Screening getScreening() {
 		return screening;
 	}

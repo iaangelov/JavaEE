@@ -147,6 +147,7 @@ public class TicketDAO extends GenericDAOImpl<Ticket> {
 			User userFromDB = userDao.findByUsername((ticket.getUser()
 					.getUsername()));
 			userFromDB.getTickets().remove(ticket);
+			deleteTicket(ticketId);
 		}
 	}
 	
