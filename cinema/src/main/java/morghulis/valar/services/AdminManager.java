@@ -47,7 +47,7 @@ public class AdminManager {
 	@Path("/movies/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addMovie(Movie movie){
-		this.movieDAO.addMovie(movie);
+		this.movieDAO.add(movie);
 	}
 
 	@DELETE

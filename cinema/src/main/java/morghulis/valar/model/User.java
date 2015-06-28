@@ -13,13 +13,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import morghulis.valar.dao.QueryNames;
 import morghulis.valar.utils.UserType;
 
 @Entity
 @XmlRootElement
 @NamedQueries({
-	@NamedQuery(name = "getAllAdmin", query = "SELECT u FROM User u"),
-	@NamedQuery(name = "getAllUser", query = "SELECT u FROM User u WHERE u.userType = 'Customer'") })
+		@NamedQuery(name = QueryNames.User_GetAllAsAdmin, query = "SELECT u FROM User u"),
+		@NamedQuery(name = QueryNames.User_ValidateCredentials, query = "SELECT u FROM User u WHERE u.username=:username AND u.password=:password"),
+		@NamedQuery(name = QueryNames.User_FindByUsername, query = "SELECT u FROM User u WHERE u.username=:username"),
+		@NamedQuery(name = QueryNames.User_GetAllAsUser, query = "SELECT u FROM User u WHERE u.userType = 'Customer'") })
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 8789553103516459097L;
@@ -33,10 +36,10 @@ public class User implements Serializable {
 	private String password;
 
 	private String email;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Ticket> tickets = new ArrayList<Ticket>(50);
-	
+
 	private String userType;
 
 	public User() {
@@ -46,7 +49,8 @@ public class User implements Serializable {
 		this.userType = UserType.CUSTOMER.getText();
 	}
 
-	public User(String username, String password, String email, UserType userType) {
+	public User(String username, String password, String email,
+			UserType userType) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -92,15 +96,15 @@ public class User implements Serializable {
 	public void setTickets(final List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
-	
+
 	public UserType getUserType() {
 		return UserType.getType(userType);
 	}
 
 	public void setUserStatus(UserType userType) {
-		if(userType == null){
+		if (userType == null) {
 			this.userType = null;
-		}else{
+		} else {
 			this.userType = userType.getText();
 		}
 	}

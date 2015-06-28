@@ -2,14 +2,25 @@ package morghulis.valar.dao;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
 
 import javax.persistence.TypedQuery;
 
-import morghulis.valar.model.User;
-
 public interface GenericDAO<T extends Serializable> {
-	Collection<T> getAllWiThNamedQuery(String namedQuery);
+	Collection<T> getListWithNamedQuery(String namedQuery);
+
+	Collection<T> getListWithNamedQuery(String namedQuery,
+			Map<String, ?> parameters);
+
+	T getSingleResultWithNamedQuery(String namedQuery);
+
+	T getSignleResultWithNamedQuery(String namedQuery, Map<String, ?> parameters);
+
 	T findById(Long id);
+
 	void add(T item);
+
+	void remove(T item);
+
 	T makeQuery(TypedQuery<T> query);
 }

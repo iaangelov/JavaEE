@@ -110,7 +110,7 @@ public class DatabaseUtils {
 
     private void addTestMovies() {
         for (Movie movie: Movies) {
-            movieDAO.addMovie(movie);
+            movieDAO.add(movie);
         }
     }
     
@@ -128,7 +128,7 @@ public class DatabaseUtils {
 
     private void addTestTickets(){
         for(Ticket ticket : Tickets){
-            ticketDAO.addTicket(ticket);
+            ticketDAO.add(ticket);
         }
     }
 }

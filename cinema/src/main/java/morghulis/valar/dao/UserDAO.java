@@ -2,10 +2,11 @@ package morghulis.valar.dao;
 
 import java.security.MessageDigest;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import javax.persistence.TypedQuery;
 
 import morghulis.valar.model.User;
 import morghulis.valar.services.UserContext;
@@ -17,12 +18,14 @@ public class UserDAO extends GenericDAOImpl<User> {
 	@Inject
 	private UserContext userContext;
 
-	public Collection<User> getAllUsers() {		
+	private Map<String, String> parameters = new HashMap<>();
+
+	public Collection<User> getAllUsers() {
 		if (userContext.getCurrentUser().getUserType() == UserType.ADMINISTRATOR) {
-			return getAllWiThNamedQuery("getAllAdmin");
+			return getListWithNamedQuery(QueryNames.User_GetAllAsAdmin);
 		}
-		
-		return getAllWiThNamedQuery("getAllUser");
+
+		return getListWithNamedQuery(QueryNames.User_GetAllAsUser);
 	}
 
 	@Override
@@ -38,22 +41,22 @@ public class UserDAO extends GenericDAOImpl<User> {
 	}
 
 	public boolean validateCredentials(String username, String password) {
-		String checkQuery = "SELECT u FROM User u WHERE u.username=:username AND u.password=:password";
-		TypedQuery<User> query = em.createQuery(checkQuery, User.class);
-		query.setParameter("username", username);
-		query.setParameter("password", getHashedPassword(password));
-		return makeQuery(query) != null;
+		parameters.clear();
+		parameters.put("username", username);
+		parameters.put("password", getHashedPassword(password));
+		return getListWithNamedQuery(QueryNames.User_ValidateCredentials,
+				parameters).size() != 0;
 	}
 
 	public User findByUsername(String username) {
-		String checkQuery = "SELECT u FROM User u WHERE u.username=:username";
-		TypedQuery<User> query = em.createQuery(checkQuery, User.class);
-		query.setParameter("username", username);
-		return makeQuery(query);
+		parameters.clear();
+		parameters.put("username", username);
+		return getSignleResultWithNamedQuery(QueryNames.User_FindByUsername,
+				parameters);
 	}
 
 	public void removeUserById(Long id) {
-		em.remove(findById(id));
+		remove(findById(id));
 	}
 
 	private String getHashedPassword(String password) {
