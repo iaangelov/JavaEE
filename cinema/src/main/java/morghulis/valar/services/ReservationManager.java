@@ -53,6 +53,10 @@ public class ReservationManager {
 	public void addReservation(Reservation newReservation) {
 		if (newReservation != null) {
 			reservationDAO.add(newReservation);
+			Reservation res = reservationDAO.findById(newReservation.getId());
+			for(Ticket t : res.getTickets()){
+				System.out.println(t.getId());
+			}
 		}
 	}
 	

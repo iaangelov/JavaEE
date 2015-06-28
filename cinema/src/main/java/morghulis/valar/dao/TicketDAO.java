@@ -120,7 +120,7 @@ public class TicketDAO extends GenericDAOImpl<Ticket> {
 				ticketToReserve.setUser(user);
 				userFromDB.getTickets().add(ticketToReserve);
 				this.reserved.add(ticketToReserve);
-				timerService.createTimer(600_000, "reserved ticket");
+				timerService.createTimer(60_000, "reserved ticket");
 			}
 		} catch (NullPointerException ex) {
 			ticket.setStatus(SeatStatus.RESERVED);

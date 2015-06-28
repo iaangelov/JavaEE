@@ -1,0 +1,97 @@
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul id="welcomeMessage" class="nav navbar-nav welcome-greeting"
+					style="float: left; color: gray; margin-top: 15px; display: none;">
+					<li>Welcome, <span id="user-holder"></span>!
+					</li>
+				</ul>
+				<ul id="loginRegisterLink" style="float: right; display: none;"
+					class="nav navbar-nav login_register">
+					<li><a href="#loginmodal" id="modaltriggerlogin"
+						rel="leanModal">Login</a></li>
+					<li><a href="#registermodal" id="modaltriggerregister"
+						rel="leanModal">Register</a></li>
+				</ul>
+
+				<div id="loginmodal" style="display: none;">
+					<h1 style="text-align: center; font-size: 30px">User Login</h1>
+					<form id="loginform" name="loginform" method="post">
+						<label for="username">Username:</label> <input type="text"
+							name="usernameLogin" id="usernameLogin" class="txtfield"
+							tabindex="1"> <label for="password">Password:</label> <input
+							type="password" name="pwdLogin" id="pwdLogin" class="txtfield"
+							tabindex="2">
+
+						<div class="center">
+							<input type="submit" name="loginbtn" id="loginbtn"
+								class="flatbtn-blu hidemodal" value="Log In" tabindex="3">
+						</div>
+					</form>
+				</div>
+
+				<div id="registermodal" style="display: none;">
+					<h1 style="text-align: center; font-size: 30px">Register</h1>
+					<form id="registerform" name="registerform" method="post">
+						<label for="username">Username:</label> <input type="text"
+							name="usernameRegister" id="usernameRegister" class="txtfield"
+							tabindex="1" autofocus> <label for="password">Password:</label>
+						<input type="password" name="pwdRegister" id="pwdRegister"
+							class="txtfield" tabindex="2"> <label for="password">Confirm
+							Password:</label> <input type="password" name="conf_pwdRegister"
+							id="conf_pwdRegister" class="txtfield" tabindex="3"> <label
+							for="email">Email:</label> <input type="text" name="email"
+							id="email" class="txtfield" tabindex="4"> <label
+							for="first_name">First name:</label> <input type="text"
+							name="first_name" id="first_name" class="txtfield" tabindex="5">
+						<label for="surname">Surname:</label> <input type="text"
+							name="last_name" id="surname" class="txtfield" tabindex="6">
+
+						<div class="center">
+							<input type="submit" name="registerbtn" id="registerbtn"
+								class="flatbtn-blu hidemodal" value="Regsiter"
+								style="margin-left: 34%;" tabindex="3">
+						</div>
+					</form>
+				</div>
+
+				<script type="text/javascript">
+					$(function() {
+						$('#loginform').submit(function(e) {
+							login();
+						});
+
+						$('#registerform').submit(function(e) {
+							register();
+						});
+
+						$("a[rel*=leanModal]").leanModal({
+							top : 110,
+							overlay : 0.45,
+							closeButton : ".hidemodal"
+						});
+
+					});
+				</script>
+				<ul id="navelems" style="float: right; display: none;"
+					class="nav navbar-nav navigation">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="profile.html">My profile</a></li>
+					<li><a onclick="logout()" href="#"> Logout </a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
