@@ -124,6 +124,7 @@ td {
     left: 0;
     right: 0;
 	margin: auto; 
+	padding-top:10px;
 	margin-top: 36.7%;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -144,14 +145,14 @@ td {
     right: 0;
 	margin: auto; 
 	text-align: center;
-	margin-top: 39.9%;
+	margin-top: 42%;
 	overflow-y: auto;
 	overflow-x: hidden;
-	background: rgba(64, 64, 64, 0.9) none repeat scroll 0 0;
-	border-color: #a4a4a4;
-	border-image: none;
-	border-style: groove;
-	border-width: 0px 1px 0px 1px;
+/* 	background: rgba(64, 64, 64, 0.9) none repeat scroll 0 0; */
+/* 	border-color: #a4a4a4; */
+/* 	border-image: none; */
+/* 	border-style: groove; */
+/* 	border-width: 0px 1px 0px 1px; */
 	
 
 }
