@@ -97,6 +97,7 @@ td {
 	height: 59%;
 	width: 57%;
 	position: absolute;
+	
 	top:0;
     bottom: 0;
     left: 0;
@@ -117,18 +118,20 @@ td {
 	height: 7%;
 	width: 57%;
 	position: absolute;
+	text-align: center;
 	top:0;
     bottom: 0;
     left: 0;
     right: 0;
 	margin: auto; 
-	margin-top: 37%;
+	margin-top: 36.7%;
 	overflow-y: auto;
 	overflow-x: hidden;
 	border-color: #a4a4a4;
 	border-image: none;
 	border-style: groove;
-	border-width: 0px 1px 1px 1px;
+	background: rgba(64, 64, 64, 0.9) none repeat scroll 0 0;
+	border-width: 0px 1px 0px 1px;
 }
 
 .legend {
@@ -140,14 +143,15 @@ td {
     left: 0;
     right: 0;
 	margin: auto; 
-	margin-top: 37%;
+	text-align: center;
+	margin-top: 39.9%;
 	overflow-y: auto;
 	overflow-x: hidden;
 	background: rgba(64, 64, 64, 0.9) none repeat scroll 0 0;
 	border-color: #a4a4a4;
 	border-image: none;
 	border-style: groove;
-	border-width: 0px 1px 1px 1px;
+	border-width: 0px 1px 0px 1px;
 	
 
 }
