@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import morghulis.valar.services.UserContext;
 import morghulis.valar.utils.UserType;
 
-@WebFilter(urlPatterns = { "/rest/admin/*", "/adminPanel.html" })
+@WebFilter(urlPatterns = { "/rest/admin/*", "/adminPanel.html", "/screeningsManager.html" })
 public class AdminFilter implements Filter {
 
 	@Inject

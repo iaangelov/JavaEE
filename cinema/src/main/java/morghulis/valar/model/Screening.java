@@ -38,6 +38,7 @@ public class Screening implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar screeningDate;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Hall hall;
 	

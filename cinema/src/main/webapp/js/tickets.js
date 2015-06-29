@@ -78,7 +78,7 @@ function renderRow(rowData) {
 	    		statusCode: {
 	    			200: function(){
 		    			alert("Successfully confirmed ticket!");
-		    			$("#tickets_table").empty();
+		    			$("#tickets_table tr:gt(0)").remove();
 		    			getAllTickets();
 		    		}
 	    		}

@@ -31,7 +31,7 @@ public class Hall implements Serializable {
 	
 	private int hallNumber;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "hall")
 	private List<Screening> screenings; // new 
 	
 	public Hall() {

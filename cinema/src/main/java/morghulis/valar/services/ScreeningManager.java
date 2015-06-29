@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import morghulis.valar.dao.HallDAO;
 import morghulis.valar.dao.ScreeningDAO;
 import morghulis.valar.model.Screening;
 
@@ -24,6 +25,9 @@ public class ScreeningManager {
 
 	@EJB
 	private ScreeningDAO screeningDAO;
+	
+	@EJB 
+	private HallDAO hallDAO;
 	
 	@GET
 	@Produces("application/json")
@@ -52,7 +56,7 @@ public class ScreeningManager {
 	@Path("screeningsByMovieName")
 	@Produces("application/json")
 	public Collection<Screening> getScreeningsByMovieId(@QueryParam("movieName") String movieName) {
-		
+		System.out.println(movieName);
 		return screeningDAO.getAllScreeningsByMovieName(movieName);
 	}
 	
@@ -69,10 +73,11 @@ public class ScreeningManager {
 	
 	@POST
 	@Path("add")
-	//@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void addScreening(Screening screening) {
-		
-		if(screening != null) {
+		if(screening != null) {			
+			Screening toAdd = new Screening();
+			toAdd.setHall(hallDAO.findByHallNumber(screening.getHall().getHallNumber()));
 			screeningDAO.add(screening);
 		}
 	}
