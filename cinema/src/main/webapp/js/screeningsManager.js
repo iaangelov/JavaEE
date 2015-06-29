@@ -9,8 +9,8 @@ $(document).ready(function() {
 
 function addScreening() {
 	var screeningDate = $("#screeningDate")[0].value;
-	var dateParts = screeningDate.split("/");
-	var sDate = new Date(Date.parse(screeningDate, "MMM dd, yyyy hh:mm"));
+	console.log(screeningDate);
+	var sDate = new Date(Date.parse(screeningDate, "dd-MM-yyyy HH:mm z"));
 	var hall = $("#screeningHall")[0].value;
 	var price = $("#screeningPrice")[0].value;
 	console.log(hall);
@@ -25,7 +25,7 @@ function addScreening() {
 			"movie" : [ {
 				"name" : currentMovie
 			} ],
-			"date" : sDate
+			"screeningDate" : sDate
 		}
 	};
 
@@ -39,9 +39,9 @@ function addScreening() {
 	}).fail(function(data) {
 		console.log(data);
 		alert("Something went wrong");
-	})/*.always(function() {
+	}).always(function() {
 		$("#screening_form").submit();
-	})*/;
+	});
 }
 
 function renderAllScreenings() {
@@ -72,12 +72,12 @@ function enter(id) {
 
 function renderScreening(screening) {
 
-	var screeningDate = new Date(Date.parse(screening.screeningDate));
+	var screeningDate = new Date(screening.screeningDate);
 	$("#screenings_body")
 			.append(
 					"<tr>"
 							+ "<td>"
-							+ screeningDate.toLocaleString()
+							+ screeningDate.toLocaleDateString()
 							+ "</td>"
 							+ "<td id="
 							+ index
@@ -87,7 +87,7 @@ function renderScreening(screening) {
 							+ "<td>$10.00</td>"
 							+ "<td><a id="
 							+ index
-							+ " onClick=\"removeScr(screening.id)\" class=\"btn btn-lg btn-primary btn-sm\" href=\"#\" role=\"button\">Remove</a></td>"
+							+ " onClick=\"removeScr("+ screening.id+")\" class=\"btn btn-lg btn-primary btn-sm\" href=\"#\" role=\"button\">Remove</a></td>"
 							+ "</tr>");
 	index++;
 }
@@ -101,7 +101,7 @@ function removeScr(id) {
 			$("#screening_table").empty();
 			// var row = $("<th>Name</th>");
 			// $("#movies_table").prepend(row);
-			renderAllScreenings();
+			location.reload();
 		}
 	});
 }

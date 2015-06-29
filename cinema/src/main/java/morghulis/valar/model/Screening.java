@@ -1,7 +1,7 @@
 package morghulis.valar.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,7 +37,7 @@ public class Screening implements Serializable {
 	private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar screeningDate;
+	private Date screeningDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Hall hall;
@@ -52,7 +52,7 @@ public class Screening implements Serializable {
 	public Screening() {
 		super();
 	}
-	public Screening(Hall hall, Movie movie, Calendar screeningDate) {
+	public Screening(Hall hall, Movie movie, Date screeningDate) {
 		super();
 		this.hall = hall;
 		this.movie = movie;
@@ -66,10 +66,10 @@ public class Screening implements Serializable {
 		this.id = id;
 	}
 	
-	public Calendar getScreeningDate() {
+	public Date getScreeningDate() {
 		return screeningDate;
 	}
-	public void setScreeningDate(Calendar screeningDate) {
+	public void setScreeningDate(Date screeningDate) {
 		this.screeningDate = screeningDate;
 	}
 	public Hall getHall() {

@@ -18,7 +18,11 @@ public class HallDAO extends GenericDAOImpl<Hall> {
 	public Hall findByHallNumber(int hallNumber) {
 		TypedQuery<Hall> query = em.createQuery("SELECT h FROM Hall h WHERE h.hallNumber = :hallNum", Hall.class);
 		query.setParameter("hallNum", hallNumber);
-		return query.getSingleResult();
+		Hall res = query.getSingleResult();
+		if(null == res){
+			res = new Hall(hallNumber);
+		}
+		return res;
 	}
 	
 }

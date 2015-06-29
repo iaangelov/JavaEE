@@ -130,10 +130,7 @@ public class TicketManager {
 		List<Ticket> res = new ArrayList<Ticket>(tickets);
 		Collections.sort(res, new Comparator<Ticket>() {
 			public int compare(Ticket c1, Ticket c2) {
-				return (int) c2.getScreening().getScreeningDate()
-						.getTimeInMillis()
-						- (int) c1.getScreening().getScreeningDate()
-								.getTimeInMillis();
+				return c2.getScreening().getScreeningDate().compareTo(c2.getScreening().getScreeningDate());
 			}
 		});
 		return res;
