@@ -100,9 +100,9 @@ td {
     left: 0;
     right: 0;
     margin: auto;
-	/*overflow-y: auto;
+	overflow-y: auto;
 	overflow-x: hidden;
-	background: rgba(64, 64, 64, 0.9) none repeat scroll 0 0;
+	/*background: rgba(64, 64, 64, 0.9) none repeat scroll 0 0;
 	border-color: #a4a4a4;
 	border-image: none;
 	border-style: groove;
