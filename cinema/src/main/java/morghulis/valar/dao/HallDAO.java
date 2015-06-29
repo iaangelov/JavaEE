@@ -6,6 +6,7 @@ import javax.ejb.Singleton;
 import javax.persistence.TypedQuery;
 
 import morghulis.valar.model.Hall;
+import morghulis.valar.model.Screening;
 
 @Singleton
 public class HallDAO extends GenericDAOImpl<Hall> {
@@ -19,4 +20,5 @@ public class HallDAO extends GenericDAOImpl<Hall> {
 		query.setParameter("hallNum", hallNumber);
 		return query.getSingleResult();
 	}
+	
 }

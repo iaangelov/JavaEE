@@ -1,5 +1,7 @@
 package morghulis.valar.services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import javax.ejb.EJB;
@@ -75,10 +77,16 @@ public class ScreeningManager {
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addScreening(Screening screening) {
+		System.out.println(screening.toString());
 		if(screening != null) {			
 			Screening toAdd = new Screening();
 			toAdd.setHall(hallDAO.findByHallNumber(screening.getHall().getHallNumber()));
-			screeningDAO.add(screening);
+			toAdd.getHall().setScreenings(new ArrayList<>(screeningDAO.getAllScreeningsByMovieName(screening.getMovie().getName())));
+			System.out.println(screening.getScreeningDate().getTime().toString());
+			Calendar cal = Calendar.getInstance();
+			//toAdd.setScreeningDate(screeningDate);
+			//toAdd.setScreeningDate(screeningDate);
+			screeningDAO.add(toAdd);
 		}
 	}
 	

@@ -1,8 +1,10 @@
 package morghulis.valar.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +33,8 @@ public class Hall implements Serializable {
 	
 	private int hallNumber;
 	
-	@OneToMany(mappedBy = "hall")
-	private List<Screening> screenings; // new 
+	@OneToMany(mappedBy = "hall", cascade = CascadeType.PERSIST)
+	private List<Screening> screenings = new ArrayList<Screening>(); // new 
 	
 	public Hall() {
 		// TODO Auto-generated constructor stub
