@@ -131,6 +131,7 @@ function findTickets() {
         	var row = $("<th>Screening</th>" +
 			"<th>User</th>" +
 			"<th>Seat number</th>" +
+			"<th>Date</th>" +
 			"<th>Status</th>");
         	$("#tickets_table").prepend(row);
         	renderTickets(data);
@@ -145,31 +146,50 @@ function renderTickets(data) {
 		}
 	}
 
-	function drawTicketRow(rowData) {
-		var row = $("<tr />")
-		$("#tickets_table").append(row);
-		row.append($("<td>" + rowData.screening.hall.hallNumber +"," + rowData.screening.movie.name + "</td>"));
-		row.append($("<td>" + rowData.user.username + "</td>"));
-		row.append($("<td>" + rowData.seatNumber + "</td>"));
-		row.append($("<td>" + rowData.status + "</td>"));
-		var remove = $("<td />");
-		var link = $("<button class=\"btn btn-lg btn-primary btn-sm\">Remove</button>");
-	    remove.append(link);
-	    row.append(remove);
-	    link.click(function() {
-	        $.ajax({
-	            url: 'rest/ticket/remove?ticketId=' + rowData.id,
-	            type: "DELETE",
-	            dataType: "json",
-	            success : function () {
-	            	$("#tickets_table").empty();
-	            	var row = $("<th>Screening</th>" +
-	            			"<th>User</th>" +
-	            			"<th>Seat number</th>" +
-	            			"<th>Status</th>");
-	            	$("#tickets_table").prepend(row);
-	            	findTickets();
-				}
-			});
-	    });
+function drawTicketRow(rowData) {
+	var row = $("<tr />")
+	$("#tickets_table").append(row);
+	row.append($("<td>" + rowData.screening.hall.hallNumber +"," + rowData.screening.movie.name + "</td>"));
+	row.append($("<td>" + rowData.user.username + "</td>"));
+	row.append($("<td>" + rowData.seatNumber + "</td>"));
+	row.append($("<td>" + rowData.screening.screeningDate + "</td>"));
+	row.append($("<td>" + rowData.status + "</td>"));
+	var remove = $("<td />");
+	var confLink = $("<button class=\"btn btn-lg btn-primary btn-sm\">Confirm</button>");
+	var link = $("<button class=\"btn btn-lg btn-primary btn-sm\">Remove</button>");
+	remove.append(confLink);
+	remove.append(link);
+    row.append(remove);
+    
+    confLink.click(function(){
+    	$.ajax({
+    		url: 'rest/admin/tickets/confirm?id=' + rowData.id,
+    		type: 'PUT',
+    		dataType: 'json',
+    		async: false,
+    		statusCode: {
+    			200: function(){
+	    			alert("Successfully confirmed ticket!");
+	    			findTickets();
+	    		}
+    		}
+    	});
+    });
+    
+    link.click(function() {
+        $.ajax({
+            url: 'rest/ticket/remove?ticketId=' + rowData.id,
+            type: "DELETE",
+            dataType: "json",
+            success : function () {
+            	$("#tickets_table").empty();
+            	var row = $("<th>Screening</th>" +
+            			"<th>User</th>" +
+            			"<th>Seat number</th>" +
+            			"<th>Status</th>");
+            	$("#tickets_table").prepend(row);
+            	findTickets();
+			}
+		});
+    });
 }

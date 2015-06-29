@@ -61,10 +61,28 @@ function renderRow(rowData) {
 	var longDateFormat = 'dd/MM/yyyy HH:mm:ss';
 	var screeningDate = $.format.date(rowData.screening.screeningDate,
 			longDateFormat);
+	var link = $("<button class=\"btn btn-lg btn-primary btn-sm\">Confirm</button>");
 	$("#tickets_table").append(row);
 	row.append($("<td>" + rowData.screening.movie.name + "</td>"));
 	row.append($("<td>" + rowData.screening.hall.hallNumber + "</td>"));
 	row.append($("<td>" + screeningDate + "</td>"));
 	row.append($("<td>" + rowData.status + "</td>"));
-
+	if(rowData.status == 'RESERVED'){
+		row.append(link);
+		link.click(function(){
+	    	$.ajax({
+	    		url: 'rest/ticket/confirm?id=' + rowData.id,
+	    		type: 'PUT',
+	    		dataType: 'json',
+	    		async: false,
+	    		statusCode: {
+	    			200: function(){
+		    			alert("Successfully confirmed ticket!");
+		    			$("#tickets_table").empty();
+		    			getAllTickets();
+		    		}
+	    		}
+	    	});
+	    });
+	}
 }

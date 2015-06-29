@@ -2,6 +2,9 @@ package morghulis.valar.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -21,6 +24,7 @@ import javax.ws.rs.core.Response;
 import morghulis.valar.dao.ScreeningDAO;
 import morghulis.valar.dao.TicketDAO;
 import morghulis.valar.model.Ticket;
+import morghulis.valar.utils.SeatStatus;
 
 @Stateless
 @Path("ticket")
@@ -107,12 +111,32 @@ public class TicketManager {
 		}
 		return new ArrayList<Ticket>();
 	}
+	
+	@PUT
+	@Path("confirm")
+	public Response confirmTicket(@QueryParam("id") Long id){
+		Ticket ticket = ticketDao.findById(id);
+		if(ticket != null){
+			ticket.setStatus(SeatStatus.TAKEN);
+		}
+		return Response.ok().build();
+	}
 
 	@GET
 	@Path("/byUserNames/{names}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Ticket> getTicketsByNames(@PathParam("names") String names) {
-		return ticketDao.findTicketsByNames(names);
+		Collection<Ticket> tickets = ticketDao.findTicketsByNames(names);
+		List<Ticket> res = new ArrayList<Ticket>(tickets);
+		Collections.sort(res, new Comparator<Ticket>() {
+			public int compare(Ticket c1, Ticket c2) {
+				return (int) c2.getScreening().getScreeningDate()
+						.getTimeInMillis()
+						- (int) c1.getScreening().getScreeningDate()
+								.getTimeInMillis();
+			}
+		});
+		return res;
 	}
 
 	// tova e za customeri da si vidqt tehnite bileti..
