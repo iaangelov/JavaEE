@@ -1,0 +1,186 @@
+/* pager wrapper, div */ 
+.pager { 
+  padding: 5px; 
+} 
+/* pager wrapper, in thead/tfoot */ 
+td.pager { 
+  background-color: #e6eeee; 
+} 
+/* pager navigation arrows */ 
+.pager img { 
+  vertical-align: middle; 
+  margin-right: 2px; 
+} 
+/* pager output text */ 
+.pager .pagedisplay { 
+  font-size: 11px; 
+  padding: 0 5px 0 5px; 
+  width: 50px; 
+  text-align: center; 
+} 
+ 
+/*** loading ajax indeterminate progress indicator ***/ 
+#tablesorterPagerLoading { 
+  background: rgba(255,255,255,0.8) url(icons/loading.gif) center center no-repeat; 
+  position: absolute; 
+  z-index: 1000; 
+} 
+ 
+/*** css used when "updateArrows" option is true ***/ 
+/* the pager itself gets a disabled class when the number of rows is less than the size */ 
+.pager.disabled { 
+  display: none; 
+} 
+/* hide or fade out pager arrows when the first or last row is visible */ 
+.pager img.disabled { 
+  /* visibility: hidden */ 
+  opacity: 0.5; 
+  filter: alpha(opacity=50); 
+}
+
+
+
+body {
+
+	background-image: url(../images/Cinema.jpg);
+	background-size: cover;
+	overflow: hidden;
+}
+
+img#poster {
+
+	margin-left: 5px;
+	margin-top: 10px;
+	height: 95%;
+	width: 35%;
+}
+
+p {
+	color: gray;
+	text-decoration: none;
+	text-align: center;
+}
+
+div#info {
+
+	overflow: auto;
+}
+
+
+h1 {
+
+	color: gray;
+	text-decoration: none;
+}
+
+.carousel-fade {
+  
+  .carousel-inner {
+    .item {
+      opacity: 0;
+      transition-property: opacity;
+    }
+
+    .active {
+      opacity: 1;
+    }
+
+    .active.left,
+    .active.right {
+      left: 0;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .next.left,
+    .prev.right {
+      opacity: 1;
+    }
+  }
+
+  .carousel-control {
+    z-index: 5;
+  }
+}
+
+
+
+html, 
+body, 
+.carousel, 
+.carousel-inner, 
+.carousel-inner .item {
+  height: 100%;
+}
+
+div#carousel {
+
+	background: rgba(64, 64, 64, 0.9);
+	height: 60%;
+	width: 60%;
+	text-align: center;
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+/*screening*/
+div#div {
+
+	background: rgba(64, 64, 64, 0.9);
+	height: 45%;
+	width: 60%;
+	text-align: center;
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    overflow-y: auto;
+	overflow-x: hidden; 
+}
+
+
+
+td {
+	
+	color: grey;
+	text-decoration: none;
+	text-align: center;
+}
+
+.table-hover tbody tr td {
+	border-top-color: #212121;
+}
+.table-hover tbody tr:hover td {
+    background: #212121;
+    border-top-color: #212121;
+}
+
+.table-hover th {
+	border-top-color: red;
+	color: grey;
+	background: #212121;
+    text-align: center;
+}
+
+#title {
+	size: 123px;
+	margin-top: 7%;
+	text-align: center;
+}
+
+#div::-webkit-scrollbar {
+    
+    background: grey;
+    width: 10px;
+}
+#div::-webkit-scrollbar-thumb {
+    
+    background: #212121;
+    width: 10px;
+}
