@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My profile</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="styles/tickets.css">
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/screenings.css">
+<link rel="stylesheet" type="text/css" href="styles/loginStyle.css">
+<script type="text/javascript" src="js/screenings.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/tickets.js"></script>
+<script type="text/javascript" src="js/jquery-dateFormat.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				redirectUnauthorized();
+				getAllTickets();
+				var $table = $("#tickets_table");
+				$table.tablesorter({
+					sortList : [ [ 0, 0 ] ],
+					theme : 'blue',
+					widthFixed : true,
+					widgets : [ "zebra" ],
+					widgetOptions : {
+						zebra : [ "normal-row", "alt-row", "filter" ]
+					}
+				});
+			});
+</script>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul id="welcomeMessage" class="nav navbar-nav welcome-greeting"
+					style="float: left; color: gray; margin-top: 15px; display: none;">
+					<li>Welcome, <span id="user-holder"></span>!
+					</li>
+				</ul>
+				<ul id="navelems" style="float: right; display: none;"
+					class="nav navbar-nav navigation">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="profile.html">My profile</a></li>
+					<li><a onclick="logout()" href="#"> Logout </a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<h1 style="margin-top: 8%; text-align: center">History of bought
+		tickets</h1>
+
+	<div id="div">
+		<table id="tickets_table" class="tablesorter table"
+			data-pagination="true" data-search="true"
+			data-sortlist="[[0,0],[2,0]]"
+			style="width: 90%; margin-left: 5%; margin-top: 9%; height: 38%;">
+			<thead>
+				<tr>
+					<th id="movieName">Movie</th>
+					<th id="hallNum">Hall</th>
+					<th id="date">Date</th>
+					<th id="status">Status</th>
+					<th id="action" style="width:50px">Action</th>
+				</tr>
+			</thead>
+			<tbody id="tickets_body"></tbody>
+		</table>
+	</div>
+
+</body>
+</html>

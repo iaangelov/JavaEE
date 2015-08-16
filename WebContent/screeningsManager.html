@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type"
+	content="text/html; charset=windows-1251">
+<title>Cinema</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/screenings.css">
+<link rel="stylesheet" type="text/css" href="styles/loginStyle.css">
+
+<script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript" src="js/screeningsManager.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="js/jquery.leanModal.min.js"></script>
+</head>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var userTaken = localStorage.getItem('userTaken');
+		var loginSuccess = localStorage.getItem('loginSuccess');
+		var registerSuccess = localStorage.getItem('registerSuccess');
+		var loginFail = localStorage.getItem('loginFail');
+
+		if (userTaken === 'true') {
+			$(function() {
+				showMessage("#usernameTaken");
+			});
+		}
+
+		if (registerSuccess === 'true') {
+			$(function() {
+				showMessage("#registerSuccess");
+			});
+		}
+
+		if (loginSuccess === 'true') {
+			$(function() {
+				showMessage("#loginSuccess");
+			});
+		}
+
+		if (loginFail === 'true') {
+			$(function() {
+				showMessage("#loginFail");
+			});
+		}
+
+		$(".alert-success").delay(2000).slideUp(500, function() {
+			$(this).alert('close');
+		});
+
+	});
+</script>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul id="welcomeMessage" class="nav navbar-nav welcome-greeting"
+					style="float: left; color: gray; margin-top: 15px; display: none;">
+					<li>Welcome, <span id="user-holder"></span>!
+					</li>
+				</ul>
+				<ul id="loginRegisterLink" style="float: right; display: none;"
+					class="nav navbar-nav login_register">
+					<li><a href="#loginmodal" id="modaltriggerlogin"
+						rel="leanModal">Login</a></li>
+					<li><a href="#registermodal" id="modaltriggerregister"
+						rel="leanModal">Register</a></li>
+				</ul>
+
+				<div id="loginmodal" style="display: none;">
+					<h1 style="text-align: center; font-size: 30px">User Login</h1>
+					<form id="loginform" name="loginform" method="post">
+						<label for="username">Username:</label> <input type="text"
+							name="usernameLogin" id="usernameLogin" class="txtfield"
+							tabindex="1"> <label for="password">Password:</label> <input
+							type="password" name="pwdLogin" id="pwdLogin" class="txtfield"
+							tabindex="2">
+
+						<div class="center">
+							<input type="submit" name="loginbtn" id="loginbtn"
+								class="flatbtn-blu hidemodal" value="Log In" tabindex="3">
+						</div>
+					</form>
+				</div>
+
+				<div id="registermodal" style="display: none;">
+					<h1 style="text-align: center; font-size: 30px">Register</h1>
+					<form id="registerform" name="registerform" method="post">
+						<label for="username">Username:</label> <input type="text"
+							name="usernameRegister" id="usernameRegister" class="txtfield"
+							tabindex="1" autofocus> <label for="password">Password:</label>
+						<input type="password" name="pwdRegister" id="pwdRegister"
+							class="txtfield" tabindex="2"> <label for="password">Confirm
+							Password:</label> <input type="password" name="conf_pwdRegister"
+							id="conf_pwdRegister" class="txtfield" tabindex="3"> <label
+							for="email">Email:</label> <input type="text" name="email"
+							id="email" class="txtfield" tabindex="4"> <label
+							for="first_name">First name:</label> <input type="text"
+							name="first_name" id="first_name" class="txtfield" tabindex="5">
+						<label for="surname">Surname:</label> <input type="text"
+							name="last_name" id="surname" class="txtfield" tabindex="6">
+							
+						<div class="center">
+							<input type="submit" name="registerbtn" id="registerbtn"
+								class="flatbtn-blu hidemodal" value="Regsiter"
+								style="margin-left: 21%;" tabindex="3">
+						</div>
+					</form>
+
+				</div>
+
+				<script type="text/javascript">
+					$(function() {
+						$('#loginform').submit(function(e) {
+							login();
+						});
+
+						$('#registerform').submit(function(e) {
+							register();
+						});
+
+						$("a[rel*=leanModal]").leanModal({
+							top : 110,
+							overlay : 0.45,
+							closeButton : ".hidemodal"
+						});
+
+					});
+				</script>
+				<ul id="navelems" style="float: right; display: none;"
+					class="nav navbar-nav navigation">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="profile.html">My profile</a></li>
+					<li><a onclick="logout()" href="#"> Logout </a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<h1 id="title"></h1>
+	<div id="div">
+		<table id="screening_table" class="table table-hover">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Hall</th>
+					<th>Price</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="screenings_body"></tbody>
+		</table>
+
+
+		<form id="screening_form" class="form-screening-add" role="form"
+			method="post">
+			<input type="text" class="form-control" name="screeningdate"
+				id="screeningDate" placeholder="dd/mm/yyyy hh:mm" required autofocus>
+			<input type="text" class="form-control" name="screeninghall"
+				id="screeningHall" placeholder="Screening hall"> <input
+				type="text" class="form-control" name="screeningprice"
+				id="screeningPrice" placeholder="Screening price">
+			<button id="btnAddScreening" class="btn btn-lg btn-primary btn-block"
+				type="button" onclick="addScreening()">Add</button>
+		</form>
+
+
+
+
+
+	</div>
+
+	<div id="messages">
+		<div id="usernameTaken" class="alert alert-danger fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Error!</strong>
+			Username has already been taken!
+		</div>
+
+		<div id="loginFail" class="alert alert-danger fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Error!</strong>
+			Wrong username and/or password!
+		</div>
+
+		<div id="loginSuccess" class="alert alert-success fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Success!</strong>
+			You have logged in successfully!
+		</div>
+
+		<div id="registerSuccess" class="alert alert-success fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Success!</strong>
+			You have been registered!
+		</div>
+	</div>
+</body>
+</html>

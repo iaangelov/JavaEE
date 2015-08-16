@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cinema</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles/index.css">
+<link rel="stylesheet" type="text/css" href="styles/loginStyle.css">
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="js/jquery.leanModal.min.js"></script>
+</head>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var userTaken = localStorage.getItem('userTaken');
+		var loginSuccess = localStorage.getItem('loginSuccess');
+		var registerSuccess = localStorage.getItem('registerSuccess');
+		var loginFail = localStorage.getItem('loginFail');
+		var fromUnauthorized = localStorage.getItem('fromUnauthorized');
+
+		if (userTaken === 'true') {
+			$(function() {
+				showMessage("#usernameTaken");
+			});
+		}
+
+		if (registerSuccess === 'true') {
+			$(function() {
+				showMessage("#registerSuccess");
+			});
+		}
+
+		if (loginSuccess === 'true') {
+			$(function() {
+				showMessage("#loginSuccess");
+			});
+		}
+
+		if (loginFail === 'true') {
+			$(function() {
+				showMessage("#loginFail");
+			});
+		}
+
+		if (fromUnauthorized === 'true') {
+			$(function() {
+				showMessage("#unauthorizedAccess");
+			});
+		}
+
+		$(".alert-success").delay(2000).slideUp(500, function() {
+			$(this).alert('close');
+		});
+
+	});
+</script>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul id="welcomeMessage" class="nav navbar-nav welcome-greeting"
+					style="float: left; color: gray; margin-top: 15px; display: none;">
+					<li>Welcome, <span id="user-holder"></span>!
+					</li>
+				</ul>
+				<ul id="loginRegisterLink" style="float: right; display: none;"
+					class="nav navbar-nav login_register">
+					<li><a href="login.html">Login</a></li>
+					<li><a href="https://www.sdn.sap.com/irj/scn/register" target="_blank">Register</a></li>
+				</ul>
+
+
+				<ul id="navelems" style="float: right; display: none;"
+					class="nav navbar-nav navigation">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="profile.html">My profile</a></li>
+					<li><a onclick="logout()" href="#"> Logout </a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+	<div id="carousel" class="carousel slide carousel-fade"
+		data-ride="carousel">
+		<!-- Carousel items -->
+		<div id="div" class="carousel-inner"></div>
+		<!-- Carousel nav -->
+		<a class="carousel-control left" href="#carousel" data-slide="prev"></a>
+		<a class="carousel-control right" href="#carousel" data-slide="next"></a>
+	</div>
+
+	<div id="messages">
+		<div id="usernameTaken" class="alert alert-danger fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Error!</strong>
+			Username has already been taken!
+		</div>
+
+		<div id="loginFail" class="alert alert-danger fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Error!</strong>
+			Wrong username and/or password!
+		</div>
+
+		<div id="loginSuccess" class="alert alert-success fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Success!</strong>
+			You have logged in successfully!
+		</div>
+
+		<div id="registerSuccess" class="alert alert-success fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Success!</strong>
+			You have been registered!
+		</div>
+
+		<div id="unauthorizedAccess" class="alert alert-danger fade in"
+			style="display: none">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Error!</strong>
+			You must be logged in to use this feature!
+		</div>
+	</div>
+</body>
+</html>
