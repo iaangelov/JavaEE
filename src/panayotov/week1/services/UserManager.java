@@ -123,7 +123,7 @@ public class UserManager {
 	@Path("login")
 	public Response loginUser(@Context HttpServletResponse response, @Context HttpServletRequest req)
 			throws IOException {
-		response.sendRedirect("/Week1/index.html");
+		response.sendRedirect(req.getContextPath() + "/index.html");
 		return RESPONSE_OK;
 	}
 
